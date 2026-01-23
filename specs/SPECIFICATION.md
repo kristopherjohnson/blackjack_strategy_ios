@@ -11,7 +11,7 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 
 ## Target Platforms
 - iOS 18+ (latest major stable release)
-- iPhone (not iPad-optimized initially)
+- iPhone and iPad (universal app with full-screen support)
 - Built with latest Xcode
 - Not distributed via App Store (personal use)
 
@@ -42,14 +42,26 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 
 ## User Interface
 - Two-tab interface (TabView)
+- **Dark mode only**: App always displays in dark mode regardless of system settings
+- **Launch screen**: App launch screen uses playfield background color (green opacity 0.15), not plain white
 - Card display using text and SF Symbols
   - Red color for hearts (♥) and diamonds (♦)
   - Black color for clubs (♣) and spades (♠)
+  - **Responsive sizing**: Card height at 22.5% of screen height (50% taller than original 15%)
+  - Maximum card height capped at 180pt for very large screens
+  - Maintains readability across different iPhone screen sizes
+  - **No border**: Cards have no outline/border (clean appearance)
 - Action buttons (4 buttons for player decisions)
   - Invalid actions visually disabled
 - Feedback display area with tap-to-continue
-  - "Tap to Continue" label must be visible in both light and dark modes
-  - Use adaptive colors that maintain visibility across appearance modes
+  - Adaptive colors optimized for dark mode
+  - **Multiline advice text**: Advice text displays in multiple lines if necessary, no truncation
+  - **Flexible feedback container**: Feedback view expands to accommodate long advice strings
+- **Compact layout**: Reduced vertical spacing between dealer's hand, player's hand, and action buttons for efficient use of screen space
+- **Adaptive orientation layout**:
+  - Portrait: Vertical layout (dealer top, player middle, buttons bottom)
+  - Landscape Left: Horizontal split (cards on left, buttons/results on right)
+  - Landscape Right: Horizontal split (cards on right, buttons/results on left)
 - Interactive strategy table viewer
 
 ## Strategy Rules (Most Common Variant)
@@ -76,10 +88,10 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Development prioritizes simplicity over polish
 
 ## Out of Scope (for MVP)
-- iPad optimization
 - Advanced strategy (card counting, deviations)
 - Rule variation selection (data file structure supports future addition)
 - Statistics/progress tracking
 - Sound effects or animations
 - App Store distribution
 - Accessibility features beyond iOS defaults
+- iPad-specific optimizations (uses responsive layout designed for iPhone)

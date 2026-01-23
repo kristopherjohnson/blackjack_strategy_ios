@@ -2,24 +2,33 @@ import SwiftUI
 
 struct CardView: View {
     let card: Card
+    var height: CGFloat = 100
+
+    private var width: CGFloat {
+        height * 0.7
+    }
+
+    private var valueFontSize: CGFloat {
+        height * 0.32
+    }
+
+    private var symbolFontSize: CGFloat {
+        height * 0.24
+    }
 
     var body: some View {
-        VStack(spacing: 4) {
+        VStack(spacing: height * 0.04) {
             Text(card.displayValue)
-                .font(.system(size: 32, weight: .bold, design: .rounded))
+                .font(.system(size: valueFontSize, weight: .bold, design: .rounded))
                 .foregroundStyle(card.suit.color)
 
             Image(systemName: card.suit.sfSymbol)
-                .font(.system(size: 24))
+                .font(.system(size: symbolFontSize))
                 .foregroundStyle(card.suit.color)
         }
-        .frame(width: 70, height: 100)
+        .frame(width: width, height: height)
         .background(.white)
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(.gray.opacity(0.5), lineWidth: 1)
-        )
+        .cornerRadius(height * 0.08)
         .shadow(radius: 2)
     }
 }

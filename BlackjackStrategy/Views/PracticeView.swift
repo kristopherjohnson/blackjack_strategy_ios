@@ -5,17 +5,34 @@ struct PracticeView: View {
     private let strategy = StrategyData()
 
     var body: some View {
-        VStack(spacing: 24) {
-            Spacer()
+        GeometryReader { geometry in
+            let isLandscape = geometry.size.width > geometry.size.height
+
+            Group {
+                if isLandscape {
+                    landscapeLayout(geometry: geometry)
+                } else {
+                    portraitLayout(geometry: geometry)
+                }
+            }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(Color.green.opacity(0.15))
+        }
+    }
+
+    private func portraitLayout(geometry: GeometryProxy) -> some View {
+        VStack(spacing: 12) {
+            Spacer(minLength: 0)
 
             VStack(spacing: 8) {
                 Text("Dealer Shows")
                     .font(.headline)
                     .foregroundStyle(.secondary)
-                CardView(card: gameState.dealerCard)
+                CardView(card: gameState.dealerCard, height: cardHeight(for: geometry.size.height))
             }
 
-            Spacer()
+            Spacer(minLength: 8)
 
             VStack(spacing: 8) {
                 Text("Your Hand")
@@ -23,7 +40,7 @@ struct PracticeView: View {
                     .foregroundStyle(.secondary)
                 HStack(spacing: 12) {
                     ForEach(Array(gameState.playerHand.cards.enumerated()), id: \.offset) { _, card in
-                        CardView(card: card)
+                        CardView(card: card, height: cardHeight(for: geometry.size.height))
                     }
                 }
                 Text(handDescription)
@@ -31,7 +48,7 @@ struct PracticeView: View {
                     .foregroundStyle(.secondary)
             }
 
-            Spacer()
+            Spacer(minLength: 8)
 
             switch gameState.practiceState {
             case .awaitingAction:
@@ -40,11 +57,65 @@ struct PracticeView: View {
                 feedbackView(correct: correct, correctAction: correctAction, advice: advice)
             }
 
-            Spacer()
+            Spacer(minLength: 0)
         }
-        .padding()
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.green.opacity(0.15))
+    }
+
+    private func landscapeLayout(geometry: GeometryProxy) -> some View {
+        HStack(spacing: 20) {
+            // Cards section
+            VStack(spacing: 12) {
+                Spacer(minLength: 0)
+
+                VStack(spacing: 8) {
+                    Text("Dealer Shows")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                    CardView(card: gameState.dealerCard, height: cardHeight(for: geometry.size.height))
+                }
+
+                Spacer(minLength: 8)
+
+                VStack(spacing: 8) {
+                    Text("Your Hand")
+                        .font(.headline)
+                        .foregroundStyle(.secondary)
+                    HStack(spacing: 12) {
+                        ForEach(Array(gameState.playerHand.cards.enumerated()), id: \.offset) { _, card in
+                            CardView(card: card, height: cardHeight(for: geometry.size.height))
+                        }
+                    }
+                    Text(handDescription)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer(minLength: 0)
+            }
+            .frame(maxWidth: .infinity)
+
+            // Buttons/Results section
+            VStack {
+                Spacer()
+
+                switch gameState.practiceState {
+                case .awaitingAction:
+                    actionButtons
+                case .showingResult(let correct, let correctAction, let advice):
+                    feedbackView(correct: correct, correctAction: correctAction, advice: advice)
+                }
+
+                Spacer()
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+
+    private func cardHeight(for screenHeight: CGFloat) -> CGFloat {
+        // Calculate card height as proportion of available screen height
+        // Reserve space for: padding, labels, buttons, spacers
+        // Cards at 22.5% of screen height (50% taller than original 15%)
+        return min(screenHeight * 0.225, 180)
     }
 
     private var handDescription: String {
@@ -106,6 +177,7 @@ struct PracticeView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
                         .padding(.horizontal)
                 }
             }

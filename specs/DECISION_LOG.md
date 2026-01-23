@@ -23,4 +23,38 @@
 2026-01-18 18:38 | TEST_PLAN.md | Added blackjack detection tests and manual verification tests
 2026-01-18 18:52 | IMPLEMENTATION_PLAN.md | Phase 8 tasks completed: blackjack detection and re-deal implemented
 2026-01-18 18:52 | TEST_PLAN.md | Blackjack unit tests added and passing (82 total tests)
+2026-01-22 10:30 | SPECIFICATION.md | Added responsive card sizing to improve device compatibility
+2026-01-22 10:30 | IMPLEMENTATION_PLAN.md | Added Phase 9 for responsive card sizing implementation
+2026-01-22 10:30 | TEST_PLAN.md | Added responsive sizing tests for various iPhone sizes
+2026-01-22 10:30 | OPEN_ISSUES.md | Removed resolved dark mode visibility bug
+2026-01-22 10:45 | SPECIFICATION.md | Added compact layout requirement to reduce vertical spacing
+2026-01-22 10:45 | IMPLEMENTATION_PLAN.md | Added Phase 10 for compact layout spacing implementation
+2026-01-22 11:00 | SPECIFICATION.md | Changed from iPhone-only to universal app (iPhone and iPad)
+2026-01-22 11:00 | IMPLEMENTATION_PLAN.md | Added Phase 11 for iPad full-screen support
+2026-01-22 11:00 | TEST_PLAN.md | Added iPad full-screen support tests
+2026-01-22 11:15 | SPECIFICATION.md | Added landscape orientation support with adaptive layout
+2026-01-22 11:15 | IMPLEMENTATION_PLAN.md | Added Phase 12 for landscape orientation implementation
+2026-01-22 11:15 | TEST_PLAN.md | Added landscape orientation tests
+2026-01-22 11:30 | SPECIFICATION.md | Increased card height by 50% (15% to 22.5% of screen height, cap 180pt)
+2026-01-22 11:30 | PracticeView.swift | Updated cardHeight calculation to 22.5% with 180pt cap
+2026-01-22 11:45 | SPECIFICATION.md | Changed to dark mode only (always use dark appearance)
+2026-01-22 11:45 | BlackjackStrategyApp.swift | Added .preferredColorScheme(.dark) to force dark mode
+2026-01-22 11:50 | SPECIFICATION.md | Added multiline advice text and flexible feedback container requirements
+2026-01-22 11:50 | IMPLEMENTATION_PLAN.md | Added Phase 13 for feedback view multiline text improvement
+2026-01-22 11:50 | OPEN_ISSUES.md | Added feedback view text truncation bug
+2026-01-22 11:50 | TEST_PLAN.md | Added manual tests for feedback view multiline text
+2026-01-22 11:55 | OPEN_ISSUES.md | Added bug: feedback view too tall, should be compact
+2026-01-22 11:55 | IMPLEMENTATION_PLAN.md | Added Phase 14 to fix feedback view height issue
+2026-01-22 12:00 | PracticeView.swift | Removed ScrollView from feedbackView for intrinsic sizing
+2026-01-22 12:00 | IMPLEMENTATION_PLAN.md | Phase 14 complete - feedback view now compact
+2026-01-22 12:00 | OPEN_ISSUES.md | Removed feedback view height bug (fixed)
+2026-01-22 12:05 | SPECIFICATION.md | Added no-border requirement for cards (clean appearance)
+2026-01-22 12:05 | IMPLEMENTATION_PLAN.md | Added Phase 15 to remove gray outline from cards
+2026-01-22 12:10 | SPECIFICATION.md | Launch screen should use playfield background color (not white)
+2026-01-22 12:10 | IMPLEMENTATION_PLAN.md | Added Phase 16 to fix launch screen background color
+2026-01-22 12:15 | CardView.swift | Removed gray outline/border from cards
+2026-01-22 12:15 | IMPLEMENTATION_PLAN.md | Phase 15 complete - card border removed
+2026-01-22 12:15 | Assets.xcassets | Added LaunchBackground color (green opacity 0.15)
+2026-01-22 12:15 | BlackjackStrategyApp.swift | Configured launch screen to use LaunchBackground color
+2026-01-22 12:15 | IMPLEMENTATION_PLAN.md | Phase 16 complete - launch screen background fixed
 <!-- LOG_END -->
