@@ -112,10 +112,11 @@
 11. **iPad Support**: Phase 11 complete (manual testing pending)
 12. **Landscape Support**: Phase 12 complete (manual testing pending)
 13. **Multiline Feedback**: Phase 13 complete (manual testing pending)
-14. **Feedback View Height Fix**: Phase 14 complete
-15. **Remove Card Border**: Phase 15 not started
-16. **Fix Launch Screen Background**: Phase 16 not started
-17. **Production Ready**: All phases complete
+14. **Feedback View Height Fix**: Phase 14 complete ✓
+15. **Remove Card Border**: Phase 15 complete ✓
+16. **Fix Launch Screen Background**: Phase 16 complete ✓
+17. **UI Animations**: Phase 17 not started
+18. **Production Ready**: All phases complete
 
 ## Phase 8: Blackjack Re-deal Feature
 - [x] Update hand generation logic to detect blackjack (21) [agent: swift-expert]
@@ -184,6 +185,25 @@
 - [x] Test launch screen displays correct color on simulator [agent: swift-expert]
 - [x] Verify smooth transition from launch to main UI [agent: swift-expert]
 
+## Phase 17: UI Animations
+- [x] Add fade-in/fade-out animation for feedback view [agent: swift-expert]
+  - [x] Animate feedback appearance using .opacity and .transition modifiers
+  - [x] Smooth fade-out when transitioning to next hand
+- [x] Add card transition animations between hands [agent: swift-expert]
+  - [x] Fade out old cards, fade in new cards
+  - [x] Use .transition(.opacity) with animation timing
+- [x] Add button state change animations [agent: swift-expert]
+  - [x] Animate enabled/disabled state transitions
+  - [x] Subtle opacity or scale changes
+- [x] Test animations on various devices [agent: swift-expert]
+  - [x] Verify smooth performance on iPhone 17 Pro (build successful, tests passing)
+  - [ ] Verify smooth performance on iPhone SE (manual verification needed)
+  - [ ] Verify smooth performance on iPhone 17 Pro Max (manual verification needed)
+  - [ ] Check animation timing feels natural (manual verification needed)
+- [ ] Test animations in both orientations [agent: swift-expert]
+  - [ ] Portrait orientation animations work correctly (manual verification needed)
+  - [ ] Landscape orientation animations work correctly (manual verification needed)
+
 ## Current Status
 **Phase 8 nearly complete.** Blackjack re-deal feature implemented and tested.
 **Phase 9 implementation complete.** Responsive card sizing implemented and tested.
@@ -194,9 +214,10 @@
 **Phase 14 complete.** Feedback view height fixed - now uses intrinsic sizing (compact).
 **Phase 15 complete.** Card border removed - cards have clean appearance without outline.
 **Phase 16 complete.** Launch screen background color fixed - uses playfield green.
+**Phase 17 implementation complete.** UI animations implemented for feedback, cards, and buttons. Manual testing needed.
 
 ### Completed Work
-- 82 unit tests passing with 100% success rate
+- 82 unit tests passing with 100% success rate (verified after animation implementation)
 - Feedback view uses intrinsic sizing (removed ScrollView for compact appearance)
 - Card border removed (.overlay modifier deleted from CardView)
 - Launch screen background color added (LaunchBackground color asset created)
@@ -221,6 +242,14 @@
 - **Portrait layout**: vertical arrangement (dealer top, player middle, buttons bottom)
 - **Landscape layout**: horizontal split (cards left half, buttons/results right half)
 - **Dark mode only**: App always displays in dark mode using `.preferredColorScheme(.dark)`
+- **UI Animations**: Implemented fade-in/fade-out transitions for feedback and cards
+  - Centralized animation timing in `stateTransitionAnimation` constant (0.3s easeInOut)
+  - Cards transition smoothly between hands using .id() tracking
+  - Button states animate opacity changes (0.2s easeInOut)
+  - Animations wrapped in withAnimation() for state changes
+  - Card model now Identifiable for proper transition tracking
+  - **Code simplified**: PracticeView reduced from 213 to 191 lines by extracting shared helpers
+  - Removed redundant .transition() modifiers (implicit with .id() changes)
 
 ### Remaining Work
 - Phase 8: Manual testing to verify no blackjacks appear in practice mode

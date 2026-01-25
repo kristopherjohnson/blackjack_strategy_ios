@@ -57,4 +57,15 @@
 2026-01-22 12:15 | Assets.xcassets | Added LaunchBackground color (green opacity 0.15)
 2026-01-22 12:15 | BlackjackStrategyApp.swift | Configured launch screen to use LaunchBackground color
 2026-01-22 12:15 | IMPLEMENTATION_PLAN.md | Phase 16 complete - launch screen background fixed
+2026-01-25 00:00 | SPECIFICATION.md | Added UI animation requirements for smooth transitions
+2026-01-25 00:00 | IMPLEMENTATION_PLAN.md | Added Phase 17 for UI animation implementation
+2026-01-25 00:00 | TEST_PLAN.md | Added animation tests for feedback, cards, and buttons
+2026-01-25 13:36 | PracticeView.swift | Implemented fade-in/fade-out animations for feedback and buttons
+2026-01-25 13:36 | PracticeView.swift | Added card transition animations using .id() tracking
+2026-01-25 13:36 | GameState.swift | Wrapped state changes in withAnimation() for smooth transitions
+2026-01-25 13:36 | Card.swift | Made Card Identifiable to support transition animations
+2026-01-25 13:36 | IMPLEMENTATION_PLAN.md | Phase 17 animation implementation complete (manual testing remaining)
+2026-01-25 13:40 | GameState.swift | Centralized animation timing with stateTransitionAnimation constant
+2026-01-25 13:40 | PracticeView.swift | Simplified by extracting dealerSection, playerSection, stateContent helpers
+2026-01-25 13:40 | PracticeView.swift | Removed redundant .transition() modifiers (22 lines saved)
 <!-- LOG_END -->

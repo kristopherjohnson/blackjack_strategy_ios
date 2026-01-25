@@ -76,9 +76,13 @@ enum Rank: Int, CaseIterable, Codable {
     }
 }
 
-struct Card: Equatable {
+struct Card: Equatable, Identifiable {
     let rank: Rank
     let suit: Suit
+
+    var id: String {
+        "\(rank.displayValue)\(suit.symbol)"
+    }
 
     var displayValue: String {
         rank.displayValue

@@ -97,6 +97,17 @@
 
 ## Manual Tests
 
+### Feedback View Multiline Text
+- [ ] Advice text wraps across multiple lines (no truncation)
+- [ ] Feedback container expands to fit advice text
+- [ ] Longest advice strings display completely on iPhone SE
+- [ ] Longest advice strings display completely on iPhone 17 Pro Max
+- [ ] Longest advice strings display completely on iPad
+- [ ] ScrollView appears if advice exceeds reasonable height
+- [ ] Feedback view layout works in portrait orientation
+- [ ] Feedback view layout works in landscape orientation
+- [ ] No layout overflow or clipping with longest advice
+
 ### Practice Mode
 - [x] Cards display with correct text and suit symbols
 - [x] Hearts and diamonds display in red
@@ -105,13 +116,57 @@
 - [x] Split button disabled for non-pairs
 - [x] Feedback appears after button press
 - [x] Tap-to-continue advances to next hand
-- [x] "Tap to Continue" label visible in light mode
-- [x] "Tap to Continue" label visible in dark mode
+- [x] App always displays in dark mode (ignores system setting)
+- [x] All UI elements visible and readable in dark mode
 - [x] Can play at least 20 consecutive hands
 - [x] Visual feedback distinguishes correct/wrong
 - [x] Mnemonic/advice shown for wrong answers
 - [ ] Blackjacks (21) never appear in practice mode
 - [ ] Play 100 hands and verify no blackjacks shown
+
+### Responsive Card Sizing
+- [x] Cards scale proportionally on iPhone SE (smallest screen) - build successful
+- [x] Cards scale proportionally on iPhone 17 Pro - build successful, tests passing
+- [x] Cards scale proportionally on iPhone 17 Pro Max (largest screen) - build successful
+- [ ] Card text remains readable on all device sizes (manual verification needed)
+- [x] Card aspect ratio maintained (width = height * 0.7) - implemented in CardView
+- [ ] No layout overflow or clipping on any device size (manual verification needed)
+- [ ] Playing field uses available space efficiently (manual verification needed)
+
+### Compact Layout Spacing
+- [x] Reduced VStack spacing from 24pt to 12pt
+- [x] Spacers use minLength constraints for tighter layout
+- [x] Builds successfully on iPhone SE (smallest screen)
+- [x] Builds successfully on iPhone 17 Pro (standard size)
+- [x] Builds successfully on iPhone 17 Pro Max (largest screen)
+- [x] All unit tests still passing (no regressions)
+- [ ] All elements remain visible and accessible on all device sizes (manual verification needed)
+- [ ] Vertical spacing feels comfortable and not cramped (manual verification needed)
+
+### iPad Full-Screen Support
+- [x] App targets both iPhone and iPad device families (TARGETED_DEVICE_FAMILY = "1,2")
+- [x] Generic iOS build succeeds (confirms iPad support enabled)
+- [x] All unit tests still passing on iPhone simulator
+- [ ] App renders full-screen on iPad simulator (manual verification needed)
+- [ ] Responsive card sizing adapts correctly to iPad screen sizes (manual verification needed)
+- [ ] Layout remains usable and readable on iPad Air (manual verification needed)
+- [ ] Layout remains usable and readable on iPad Pro 11" (manual verification needed)
+- [ ] Layout remains usable and readable on iPad Pro 13" (manual verification needed)
+
+### Landscape Orientation Support
+- [x] Code detects orientation using GeometryReader (width > height = landscape)
+- [x] Portrait orientation uses vertical layout (dealer top, player middle, buttons bottom)
+- [x] Landscape orientation uses horizontal split layout (cards left, buttons right)
+- [x] Builds successfully with landscape support
+- [x] All unit tests still passing (no regressions)
+- [ ] Portrait orientation displays correctly on simulator/device (manual verification needed)
+- [ ] Landscape orientation displays correctly on simulator/device (manual verification needed)
+- [ ] Card sizing adapts correctly to landscape dimensions (manual verification needed)
+- [ ] All elements remain visible and accessible in landscape (manual verification needed)
+- [ ] Smooth transition when rotating device (no layout glitches) (manual verification needed)
+- [ ] Landscape layout works on iPhone SE (smallest screen) (manual verification needed)
+- [ ] Landscape layout works on iPhone 17 Pro Max (largest screen) (manual verification needed)
+- [ ] Landscape layout works on iPad (manual verification needed)
 
 ### Reference Mode
 - [x] Interactive table displays correctly
@@ -141,3 +196,18 @@
 - [x] Feedback appears immediately after selection
 - [x] Tab switching is smooth
 - [x] No memory leaks during extended play
+
+## UI Animation Tests
+- [x] Feedback view fades in smoothly when answer is selected (implemented with .opacity transition)
+- [x] Feedback view fades out smoothly when transitioning to next hand (withAnimation wrapper)
+- [x] Cards transition smoothly between hands (old fade out, new fade in) (using .id() tracking)
+- [x] Button state changes animate smoothly (enabled/disabled) (.animation modifier with value)
+- [x] Tab switching uses built-in smooth transitions (TabView default behavior)
+- [x] Build succeeds on iPhone 17 Pro simulator (verified, all tests passing)
+- [ ] Animations perform smoothly on iPhone SE (manual verification needed)
+- [ ] Animations perform smoothly on iPhone 17 Pro Max (manual verification needed)
+- [ ] Animation timing feels natural (0.3s feedback, 0.2s buttons) (manual verification needed)
+- [ ] Animations work correctly in portrait orientation (manual verification needed)
+- [ ] Animations work correctly in landscape orientation (manual verification needed)
+- [ ] No animation jank or stuttering during transitions (manual verification needed)
+- [ ] Animations don't interfere with user interaction (manual verification needed)

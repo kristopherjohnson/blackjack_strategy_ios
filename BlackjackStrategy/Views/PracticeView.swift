@@ -25,37 +25,15 @@ struct PracticeView: View {
         VStack(spacing: 12) {
             Spacer(minLength: 0)
 
-            VStack(spacing: 8) {
-                Text("Dealer Shows")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                CardView(card: gameState.dealerCard, height: cardHeight(for: geometry.size.height))
-            }
+            dealerSection(cardHeight: cardHeight(for: geometry.size.height))
 
             Spacer(minLength: 8)
 
-            VStack(spacing: 8) {
-                Text("Your Hand")
-                    .font(.headline)
-                    .foregroundStyle(.secondary)
-                HStack(spacing: 12) {
-                    ForEach(Array(gameState.playerHand.cards.enumerated()), id: \.offset) { _, card in
-                        CardView(card: card, height: cardHeight(for: geometry.size.height))
-                    }
-                }
-                Text(handDescription)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
+            playerSection(cardHeight: cardHeight(for: geometry.size.height))
 
             Spacer(minLength: 8)
 
-            switch gameState.practiceState {
-            case .awaitingAction:
-                actionButtons
-            case .showingResult(let correct, let correctAction, let advice):
-                feedbackView(correct: correct, correctAction: correctAction, advice: advice)
-            }
+            stateContent
 
             Spacer(minLength: 0)
         }
@@ -63,59 +41,71 @@ struct PracticeView: View {
 
     private func landscapeLayout(geometry: GeometryProxy) -> some View {
         HStack(spacing: 20) {
-            // Cards section
             VStack(spacing: 12) {
                 Spacer(minLength: 0)
 
-                VStack(spacing: 8) {
-                    Text("Dealer Shows")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                    CardView(card: gameState.dealerCard, height: cardHeight(for: geometry.size.height))
-                }
+                dealerSection(cardHeight: cardHeight(for: geometry.size.height))
 
                 Spacer(minLength: 8)
 
-                VStack(spacing: 8) {
-                    Text("Your Hand")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
-                    HStack(spacing: 12) {
-                        ForEach(Array(gameState.playerHand.cards.enumerated()), id: \.offset) { _, card in
-                            CardView(card: card, height: cardHeight(for: geometry.size.height))
-                        }
-                    }
-                    Text(handDescription)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
+                playerSection(cardHeight: cardHeight(for: geometry.size.height))
 
                 Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity)
 
-            // Buttons/Results section
             VStack {
                 Spacer()
-
-                switch gameState.practiceState {
-                case .awaitingAction:
-                    actionButtons
-                case .showingResult(let correct, let correctAction, let advice):
-                    feedbackView(correct: correct, correctAction: correctAction, advice: advice)
-                }
-
+                stateContent
                 Spacer()
             }
             .frame(maxWidth: .infinity)
         }
     }
 
+    // Extracted helper for dealer card display
+    private func dealerSection(cardHeight: CGFloat) -> some View {
+        VStack(spacing: 8) {
+            Text("Dealer Shows")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            CardView(card: gameState.dealerCard, height: cardHeight)
+                .id(gameState.dealerCard.id)
+        }
+    }
+
+    // Extracted helper for player hand display
+    private func playerSection(cardHeight: CGFloat) -> some View {
+        VStack(spacing: 8) {
+            Text("Your Hand")
+                .font(.headline)
+                .foregroundStyle(.secondary)
+            HStack(spacing: 12) {
+                ForEach(Array(gameState.playerHand.cards.enumerated()), id: \.offset) { index, card in
+                    CardView(card: card, height: cardHeight)
+                        .id("\(card.id)-\(index)")
+                }
+            }
+            Text(handDescription)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    // Extracted helper for action/feedback state display
+    @ViewBuilder
+    private var stateContent: some View {
+        switch gameState.practiceState {
+        case .awaitingAction:
+            actionButtons
+        case .showingResult(let correct, let correctAction, let advice):
+            feedbackView(correct: correct, correctAction: correctAction, advice: advice)
+        }
+    }
+
     private func cardHeight(for screenHeight: CGFloat) -> CGFloat {
-        // Calculate card height as proportion of available screen height
-        // Reserve space for: padding, labels, buttons, spacers
-        // Cards at 22.5% of screen height (50% taller than original 15%)
-        return min(screenHeight * 0.225, 180)
+        // Cards at 22.5% of screen height, capped at 180
+        min(screenHeight * 0.225, 180)
     }
 
     private var handDescription: String {
@@ -156,6 +146,7 @@ struct PracticeView: View {
         }
         .disabled(isDisabled)
         .opacity(isDisabled ? 0.5 : 1.0)
+        .animation(.easeInOut(duration: 0.2), value: isDisabled)
     }
 
     private func feedbackView(correct: Bool, correctAction: PlayerAction, advice: String) -> some View {

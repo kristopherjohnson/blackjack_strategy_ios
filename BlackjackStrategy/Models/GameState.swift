@@ -1,4 +1,8 @@
 import Foundation
+import SwiftUI
+
+// Consistent animation timing for state transitions
+private let stateTransitionAnimation = Animation.easeInOut(duration: 0.3)
 
 enum PlayerAction: String, CaseIterable {
     case hit = "H"
@@ -37,9 +41,11 @@ class GameState {
     }
 
     func newHand() {
-        playerHand = Hand.randomTwoCard()
-        dealerCard = Card.random()
-        practiceState = .awaitingAction
+        withAnimation(stateTransitionAnimation) {
+            playerHand = Hand.randomTwoCard()
+            dealerCard = Card.random()
+            practiceState = .awaitingAction
+        }
     }
 
     func checkAction(_ action: PlayerAction, strategy: StrategyData) {
@@ -58,10 +64,12 @@ class GameState {
         )
 
         let isCorrect = action == correctAction
-        practiceState = .showingResult(
-            correct: isCorrect,
-            correctAction: correctAction,
-            advice: advice
-        )
+        withAnimation(stateTransitionAnimation) {
+            practiceState = .showingResult(
+                correct: isCorrect,
+                correctAction: correctAction,
+                advice: advice
+            )
+        }
     }
 }

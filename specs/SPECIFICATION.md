@@ -44,6 +44,11 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Two-tab interface (TabView)
 - **Dark mode only**: App always displays in dark mode regardless of system settings
 - **Launch screen**: App launch screen uses playfield background color (green opacity 0.15), not plain white
+- **UI Animations**: Smooth animations during transitions where UI elements appear, disappear, or change
+  - Fade in/out for feedback display and dismissal
+  - Smooth transitions when changing cards between hands
+  - Animated state changes for buttons (enabled/disabled)
+  - Tab switching animations (built-in TabView transitions)
 - Card display using text and SF Symbols
   - Red color for hearts (♥) and diamonds (♦)
   - Black color for clubs (♣) and spades (♠)
@@ -91,7 +96,8 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Advanced strategy (card counting, deviations)
 - Rule variation selection (data file structure supports future addition)
 - Statistics/progress tracking
-- Sound effects or animations
+- Sound effects
+- Advanced animations (spring animations, complex transitions)
 - App Store distribution
 - Accessibility features beyond iOS defaults
 - iPad-specific optimizations (uses responsive layout designed for iPhone)
