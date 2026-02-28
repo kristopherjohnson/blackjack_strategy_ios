@@ -40,8 +40,19 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Allow easy lookup of correct plays by hand type and dealer card
 - Organized by: Hard totals, Soft totals, Pairs
 
+### Statistics Mode (Tab 3)
+- Track accuracy of user's last 1000 plays (rolling window)
+- **Overall accuracy**: percentage of correct decisions across all plays
+- **Breakdown by hand category**: separate accuracy rates for Hard totals, Soft totals, and Pairs
+- **Breakdown by specific hand**: accuracy per hand value (e.g., Hard 16, Soft A,7, Pair 8,8)
+- **Reset button**: clears all statistics counters to zero (with confirmation prompt)
+- **Persistence**: statistics saved across app sessions using UserDefaults
+- Rolling window: once 1000 plays are recorded, oldest play is dropped when new play is added
+- Display shows count of plays and percentage correct for each group
+- Groups with zero plays show "—" instead of a percentage
+
 ## User Interface
-- Two-tab interface (TabView)
+- Three-tab interface (TabView)
 - **Dark mode only**: App always displays in dark mode regardless of system settings
 - **Launch screen**: App launch screen uses playfield background color (green opacity 0.15), not plain white
 - **UI Animations**: Smooth animations during transitions where UI elements appear, disappear, or change
@@ -89,13 +100,12 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 ## Constraints
 - MVP scope: minimal features only
 - No backend/networking required
-- No user accounts or progress tracking (initially)
+- No user accounts
 - Development prioritizes simplicity over polish
 
 ## Out of Scope (for MVP)
 - Advanced strategy (card counting, deviations)
 - Rule variation selection (data file structure supports future addition)
-- Statistics/progress tracking
 - Sound effects
 - Advanced animations (spring animations, complex transitions)
 - App Store distribution

@@ -68,4 +68,5 @@
 2026-01-25 13:40 | GameState.swift | Centralized animation timing with stateTransitionAnimation constant
 2026-01-25 13:40 | PracticeView.swift | Simplified by extracting dealerSection, playerSection, stateContent helpers
 2026-01-25 13:40 | PracticeView.swift | Removed redundant .transition() modifiers (22 lines saved)
+2026-02-28 00:00 | SPECIFICATION.md, IMPLEMENTATION_PLAN.md, TEST_PLAN.md | Add Statistics tab (Tab 3): rolling window of last 1000 plays, overall + per-category + per-hand accuracy, Reset button with confirmation, UserDefaults persistence
 <!-- LOG_END -->

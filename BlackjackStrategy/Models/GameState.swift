@@ -30,6 +30,7 @@ class GameState {
     var playerHand: Hand
     var dealerCard: Card
     var practiceState: PracticeState = .awaitingAction
+    var statisticsStore: StatisticsStore = StatisticsStore()
 
     init() {
         playerHand = Hand.randomTwoCard()
@@ -64,6 +65,22 @@ class GameState {
         )
 
         let isCorrect = action == correctAction
+
+        // Record result for statistics tracking
+        let category: HandCategory
+        if playerHand.isPair {
+            category = .pairs
+        } else if playerHand.isSoft {
+            category = .soft
+        } else {
+            category = .hard
+        }
+        statisticsStore.record(PlayResult(
+            handCategory: category,
+            handKey: playerHand.strategyKey,
+            isCorrect: isCorrect
+        ))
+
         withAnimation(stateTransitionAnimation) {
             practiceState = .showingResult(
                 correct: isCorrect,

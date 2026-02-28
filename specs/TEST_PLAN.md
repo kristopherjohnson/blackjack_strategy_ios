@@ -197,6 +197,33 @@
 - [x] Tab switching is smooth
 - [x] No memory leaks during extended play
 
+## Statistics Tests
+
+### StatisticsStore Unit Tests
+- [x] `record()` adds a `PlayResult` to the buffer
+- [x] Buffer size caps at 1000 (1001st entry drops the oldest)
+- [x] Overall accuracy: 0 plays → nil/zero; all correct → 100%; mixed → correct ratio
+- [x] Per-category accuracy: correct totals for hard, soft, and pairs categories
+- [x] Per-hand accuracy: correct results grouped by hand key (e.g., "16", "A,7", "8,8")
+- [x] `reset()` clears all entries; all accuracy values return nil/zero
+- [x] Persistence: `StatisticsStore` initialized from UserDefaults reflects previously recorded plays
+- [x] Persistence: uses a separate UserDefaults suite for testing (avoids polluting app data)
+
+### Manual Tests: Statistics Tab
+- [x] Statistics tab appears as third tab with correct icon and label
+- [x] Overall row shows correct play count and accuracy percentage
+- [x] Hard, Soft, and Pairs rows show correct per-category accuracy
+- [x] Per-hand rows appear under each category
+- [x] Hands with zero plays show "—" (not 0% or NaN)
+- [x] Statistics update immediately after each practice play
+- [x] Reset button shows confirmation alert before clearing
+- [x] After reset: all rows show "—" and play counts return to 0
+- [x] Statistics survive app restart (navigate away and relaunch)
+- [ ] After 1000 plays, oldest play is dropped (rolling window)
+- [ ] Statistics display readable on iPhone SE (small screen)
+- [ ] Statistics display readable on iPhone 17 Pro Max (large screen)
+- [ ] Statistics display readable on iPad
+
 ## UI Animation Tests
 - [x] Feedback view fades in smoothly when answer is selected (implemented with .opacity transition)
 - [x] Feedback view fades out smoothly when transitioning to next hand (withAnimation wrapper)

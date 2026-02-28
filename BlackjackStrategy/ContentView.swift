@@ -1,9 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Lifted up so StatisticsView shares the same instance as PracticeView
+    @State private var gameState = GameState()
+
     var body: some View {
         TabView {
-            PracticeView()
+            PracticeView(gameState: gameState)
                 .tabItem {
                     Label("Practice", systemImage: "gamecontroller")
                 }
@@ -11,6 +14,11 @@ struct ContentView: View {
             ReferenceView()
                 .tabItem {
                     Label("Reference", systemImage: "book")
+                }
+
+            StatisticsView(statisticsStore: gameState.statisticsStore)
+                .tabItem {
+                    Label("Statistics", systemImage: "chart.bar")
                 }
         }
     }

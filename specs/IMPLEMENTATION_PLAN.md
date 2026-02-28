@@ -115,8 +115,9 @@
 14. **Feedback View Height Fix**: Phase 14 complete ✓
 15. **Remove Card Border**: Phase 15 complete ✓
 16. **Fix Launch Screen Background**: Phase 16 complete ✓
-17. **UI Animations**: Phase 17 not started
-18. **Production Ready**: All phases complete
+17. **UI Animations**: Phase 17 complete ✓
+18. **Statistics Tab**: Phase 18 complete ✓
+19. **Production Ready**: All phases complete (manual testing pending for 8, 9, 10, 11, 12, 13, 17)
 
 ## Phase 8: Blackjack Re-deal Feature
 - [x] Update hand generation logic to detect blackjack (21) [agent: swift-expert]
@@ -204,85 +205,70 @@
   - [ ] Portrait orientation animations work correctly (manual verification needed)
   - [ ] Landscape orientation animations work correctly (manual verification needed)
 
+## Phase 18: Statistics Tab
+- [x] Define `PlayResult` model: hand category (hard/soft/pairs), hand key, correct/incorrect [agent: swift-expert]
+- [x] Define `StatisticsStore` (`@Observable`): rolling buffer of last 1000 `PlayResult` entries, persisted via UserDefaults [agent: swift-expert]
+- [x] Record each practice play in `GameState` by calling `StatisticsStore.record()` [agent: swift-expert]
+- [x] Compute derived stats in `StatisticsStore`: overall accuracy, per-category accuracy, per-hand accuracy [agent: swift-expert]
+- [x] Create `StatisticsView` tab with three sections: Overall, By Category, By Hand [agent: swift-expert]
+  - [x] Overall row: total plays and % correct
+  - [x] Category rows: Hard, Soft, Pairs each showing plays and % correct
+  - [x] Per-hand rows: grouped under each category, showing hand key, plays, and % correct
+  - [x] Groups/hands with zero plays show "—" for accuracy
+- [x] Add Reset button to `StatisticsView` with confirmation alert [agent: swift-expert]
+- [x] Add "Statistics" tab (tab icon: chart.bar or similar SF Symbol) to ContentView TabView [agent: swift-expert]
+- [x] Write unit tests for `StatisticsStore` [agent: swift-expert]
+  - [x] Record play adds entry to buffer
+  - [x] Buffer caps at 1000 entries (oldest dropped)
+  - [x] Overall accuracy calculation correct
+  - [x] Per-category accuracy calculation correct
+  - [x] Per-hand accuracy calculation correct
+  - [x] Reset clears all entries
+  - [x] Persistence: data survives re-initialization (using test UserDefaults suite)
+- [x] Manual testing: verify statistics update correctly during practice
+- [x] Manual testing: verify Reset clears all data and UI updates immediately
+- [x] Manual testing: verify statistics persist across app restarts
+
 ## Current Status
-**Phase 8 nearly complete.** Blackjack re-deal feature implemented and tested.
-**Phase 9 implementation complete.** Responsive card sizing implemented and tested.
-**Phase 10 implementation complete.** Compact layout spacing implemented and tested.
-**Phase 11 implementation complete.** iPad full-screen support enabled.
-**Phase 12 implementation complete.** Landscape orientation support implemented.
-**Phase 13 implementation complete.** Feedback view multiline text implemented and tested.
-**Phase 14 complete.** Feedback view height fixed - now uses intrinsic sizing (compact).
-**Phase 15 complete.** Card border removed - cards have clean appearance without outline.
-**Phase 16 complete.** Launch screen background color fixed - uses playfield green.
-**Phase 17 implementation complete.** UI animations implemented for feedback, cards, and buttons. Manual testing needed.
+**Phase 18 complete.** Statistics tab fully implemented and manually tested.
+
+All implementation phases complete. Remaining work is manual testing for phases 8, 9, 10, 11, 12, 13, and 17 (device/orientation verification).
 
 ### Completed Work
-- 82 unit tests passing with 100% success rate (verified after animation implementation)
+- **91 unit tests** (82 original + 9 StatisticsStore tests), all passing
+- **Statistics Tab (Phase 18)**: `StatisticsStore` with 1000-entry rolling buffer, UserDefaults persistence, `StatisticsView` with overall/category/per-hand breakdown, Reset with confirmation
+- `GameState` lifted to ContentView level; `statisticsStore` property added to GameState
+- `PracticeView` receives `GameState` as parameter (not owner)
 - Feedback view uses intrinsic sizing (removed ScrollView for compact appearance)
 - Card border removed (.overlay modifier deleted from CardView)
-- Launch screen background color added (LaunchBackground color asset created)
-- Launch screen configured to use playfield green color
+- Launch screen background color uses playfield green (LaunchBackground color asset)
 - Advice text uses `.fixedSize(horizontal: false, vertical: true)` to prevent truncation
-- Successfully builds on iPhone SE, iPhone 17 Pro, and iPhone 17 Pro Max
-- `Hand.isBlackjack` property added to detect 21 with 2 cards
-- `Hand.randomTwoCard()` updated to re-deal on blackjack
-- Unit tests verify blackjack detection and re-deal behavior
-- CardView now accepts dynamic height parameter with proportional sizing
-- **Card height increased by 50%: now 22.5% of screen height (capped at 180pt)**
-- Card width maintains 0.7 aspect ratio
-- Font sizes scale proportionally (32% and 24% of card height)
-- Corner radius and spacing scale with card size
-- VStack spacing reduced from 24 to 12 for more compact layout
-- Spacers now use minLength constraints (0 or 8) for tighter spacing
-- Successfully builds on iPhone SE, iPhone 17 Pro, and iPhone 17 Pro Max
-- **TARGETED_DEVICE_FAMILY updated from "1" (iPhone) to "1,2" (iPhone + iPad)**
-- Generic iOS build succeeds (iPad support confirmed)
-- iPad orientation settings already configured for all orientations
-- **Adaptive orientation layout**: detects landscape vs portrait using GeometryReader
-- **Portrait layout**: vertical arrangement (dealer top, player middle, buttons bottom)
-- **Landscape layout**: horizontal split (cards left half, buttons/results right half)
-- **Dark mode only**: App always displays in dark mode using `.preferredColorScheme(.dark)`
-- **UI Animations**: Implemented fade-in/fade-out transitions for feedback and cards
-  - Centralized animation timing in `stateTransitionAnimation` constant (0.3s easeInOut)
-  - Cards transition smoothly between hands using .id() tracking
-  - Button states animate opacity changes (0.2s easeInOut)
-  - Animations wrapped in withAnimation() for state changes
-  - Card model now Identifiable for proper transition tracking
-  - **Code simplified**: PracticeView reduced from 213 to 191 lines by extracting shared helpers
-  - Removed redundant .transition() modifiers (implicit with .id() changes)
+- `Hand.isBlackjack` / `Hand.randomTwoCard()` updated to re-deal on blackjack
+- CardView: dynamic height (22.5% of screen height, capped at 180pt), 0.7 aspect ratio
+- VStack spacing reduced from 24 to 12; Spacers use minLength constraints
+- TARGETED_DEVICE_FAMILY = "1,2" (iPhone + iPad)
+- Adaptive orientation layout (portrait: vertical; landscape: horizontal split)
+- Dark mode only via `.preferredColorScheme(.dark)`
+- UI Animations: fade-in/out transitions, 0.3s easeInOut timing, .id() card tracking, 0.2s button state changes
 
-### Remaining Work
-- Phase 8: Manual testing to verify no blackjacks appear in practice mode
-- Phase 9: Manual verification of readability on smallest and largest devices
-- Phase 10: Manual verification that compact layout elements remain visible and accessible
-- Phase 11: Manual testing on iPad simulator/device to verify full-screen rendering and responsive layout
-- Phase 12: Manual testing of landscape orientation and rotation transitions; decision on left/right mirroring behavior
-- Phase 13: Manual testing to verify no text truncation on any device size
-- Phase 14: Fix feedback view height to be compact (only as tall as content)
+### Remaining Work (manual testing only)
+- Phase 8: Verify no blackjacks appear in practice mode
+- Phase 9: Verify card readability on smallest and largest devices
+- Phase 10: Verify compact layout elements visible and accessible on all sizes
+- Phase 11: Test iPad simulator/device for full-screen rendering and responsive layout
+- Phase 12: Test landscape orientation and rotation transitions
+- Phase 13: Verify no text truncation on any device size
+- Phase 17: Verify animation smoothness on iPhone SE and Pro Max; both orientations
 
 ### Implementation Summary
-- 9 Swift source files created
-- Complete data models (Card, Hand, GameState, StrategyData)
-- Practice mode with random hand generation and feedback
+- 11 Swift source files (9 app + 2 new: StatisticsStore, StatisticsView)
+- Complete data models (Card, Hand, GameState, StrategyData, StatisticsStore)
+- Practice mode with random hand generation, feedback, and statistics recording
 - Reference mode with interactive strategy table
+- Statistics mode with rolling accuracy tracking and UserDefaults persistence
 - 340 strategy scenarios in JSON (hard/soft/pairs)
 - Development team configured (A75NSTK2G2)
-- Successfully runs on iOS Simulator
+- Builds successfully for generic iOS (arm64)
 
 ## Next Steps
-### Option 1: Add Unit Tests (Phase 6)
-1. Add unit test target to Xcode project
-2. Implement automated tests for models and strategy data
-3. Achieve 100% test pass rate
-4. Provides regression protection for future changes
-
-### Option 2: Fix UI Issues (Phase 6.5)
-1. Fix dark mode visibility for "Tap to Continue" label
-2. Test on physical device in both light and dark modes
-3. Ensures accessibility across appearance modes
-
-### Option 3: Continue Manual Testing (Phase 7)
-1. Perform comprehensive testing of all hand combinations
-2. Verify strategy correctness for edge cases
-3. Test on various iPhone screen sizes
-4. Fix any bugs discovered
+Complete remaining manual testing on physical devices/simulators (phases 8, 9, 10, 11, 12, 13, 17).

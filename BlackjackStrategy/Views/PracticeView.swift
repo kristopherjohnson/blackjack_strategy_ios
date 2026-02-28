@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct PracticeView: View {
-    @State private var gameState = GameState()
+    var gameState: GameState
     private let strategy = StrategyData()
 
     var body: some View {
@@ -187,5 +187,5 @@ struct PracticeView: View {
 }
 
 #Preview {
-    PracticeView()
+    PracticeView(gameState: GameState())
 }
