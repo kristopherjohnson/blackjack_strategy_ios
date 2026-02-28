@@ -224,6 +224,13 @@
 - [ ] Statistics display readable on iPhone 17 Pro Max (large screen)
 - [ ] Statistics display readable on iPad
 
+## App Icon Tests
+- [x] Icon appears in simulator home screen at correct size (verified manually)
+- [x] Icon appears in app switcher (verified manually)
+- [x] Icon is visible and recognizable at small sizes (20pt, 29pt, 40pt)
+- [x] Icon colors match app's green felt and dark theme
+- [x] No icon placeholder/missing icon warning in Xcode
+
 ## Dark Mode Preview Tests
 - [x] All `#Preview` blocks render in dark mode in Xcode canvas
 - [x] No preview uses default (light) color scheme

@@ -18,6 +18,10 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 ## App Identity
 - **Name**: Blackjack Strategy
 - **Bundle ID**: net.kristopherjohnson.blackjack_strategy
+- **App Icon**: Jack of Spades (J♠) over a green felt background
+  - Background: playfield green (`Color.green.opacity(0.15)` over black, matching app background)
+  - Card: white/light card face with black suit and rank text
+  - Simple, clean design readable at all icon sizes (20pt–1024pt)
 
 ## Features
 

@@ -229,6 +229,13 @@
 - [x] Manual testing: verify Reset clears all data and UI updates immediately
 - [x] Manual testing: verify statistics persist across app restarts
 
+## Phase 20: App Icon
+- [x] Design app icon: J♠ on green felt background matching app colors [agent: swift-expert]
+  - [x] Create a 1024×1024 PNG using CoreGraphics Swift script
+  - [x] Match CardView style: .rounded bold font, suit.spade.fill SF Symbol, white card, 0.7 aspect ratio
+  - [x] Add to `AppIcon` asset catalog in `Assets.xcassets` with Contents.json
+  - [x] Verify icon appears correctly in simulator home screen and app switcher (verified manually)
+
 ## Phase 19: Dark Mode Previews
 - [x] Add `.preferredColorScheme(.dark)` to all `#Preview` blocks in the app [agent: swift-expert]
   - [x] Find all files containing `#Preview` macros
