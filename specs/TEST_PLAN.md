@@ -224,6 +224,11 @@
 - [ ] Statistics display readable on iPhone 17 Pro Max (large screen)
 - [ ] Statistics display readable on iPad
 
+## Dark Mode Preview Tests
+- [x] All `#Preview` blocks render in dark mode in Xcode canvas
+- [x] No preview uses default (light) color scheme
+- [x] Preview appearance matches what users see in the running app (verified manually)
+
 ## UI Animation Tests
 - [x] Feedback view fades in smoothly when answer is selected (implemented with .opacity transition)
 - [x] Feedback view fades out smoothly when transitioning to next hand (withAnimation wrapper)

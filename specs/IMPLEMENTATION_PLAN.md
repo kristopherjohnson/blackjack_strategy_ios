@@ -229,6 +229,12 @@
 - [x] Manual testing: verify Reset clears all data and UI updates immediately
 - [x] Manual testing: verify statistics persist across app restarts
 
+## Phase 19: Dark Mode Previews
+- [x] Add `.preferredColorScheme(.dark)` to all `#Preview` blocks in the app [agent: swift-expert]
+  - [x] Find all files containing `#Preview` macros
+  - [x] Wrap each preview in a container with `.preferredColorScheme(.dark)` applied
+  - [x] Verify Xcode previews render in dark mode
+
 ## Current Status
 **Phase 18 complete.** Statistics tab fully implemented and manually tested.
 

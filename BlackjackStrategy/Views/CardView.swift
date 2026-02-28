@@ -41,4 +41,5 @@ struct CardView: View {
     }
     .padding()
     .background(Color.green.opacity(0.7))
+    .preferredColorScheme(.dark)
 }

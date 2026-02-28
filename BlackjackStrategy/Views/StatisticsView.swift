@@ -147,4 +147,5 @@ struct StatisticsView: View {
 
 #Preview {
     StatisticsView(statisticsStore: StatisticsStore())
+        .preferredColorScheme(.dark)
 }

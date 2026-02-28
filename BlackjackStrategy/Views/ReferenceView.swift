@@ -102,4 +102,5 @@ struct ReferenceView: View {
 
 #Preview {
     ReferenceView()
+        .preferredColorScheme(.dark)
 }

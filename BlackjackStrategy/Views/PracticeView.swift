@@ -188,4 +188,5 @@ struct PracticeView: View {
 
 #Preview {
     PracticeView(gameState: GameState())
+        .preferredColorScheme(.dark)
 }

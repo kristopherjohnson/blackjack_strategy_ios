@@ -54,6 +54,7 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 ## User Interface
 - Three-tab interface (TabView)
 - **Dark mode only**: App always displays in dark mode regardless of system settings
+  - All `#Preview` blocks must apply `.preferredColorScheme(.dark)` so Xcode previews match the app's actual appearance
 - **Launch screen**: App launch screen uses playfield background color (green opacity 0.15), not plain white
 - **UI Animations**: Smooth animations during transitions where UI elements appear, disappear, or change
   - Fade in/out for feedback display and dismissal
