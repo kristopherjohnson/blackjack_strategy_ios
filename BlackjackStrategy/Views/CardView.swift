@@ -13,14 +13,14 @@ struct CardView: View {
         height * 0.7
     }
 
-    /// Font size for the rank label, scaled to card height.
+    /// Font size for the rank label, scaled to card height. Minimum 1pt to avoid zero-size rendering warnings.
     private var valueFontSize: CGFloat {
-        height * 0.32
+        max(height * 0.32, 1)
     }
 
-    /// Font size for the suit symbol, scaled to card height.
+    /// Font size for the suit symbol, scaled to card height. Minimum 1pt to avoid zero-size rendering warnings.
     private var symbolFontSize: CGFloat {
-        height * 0.24
+        max(height * 0.24, 1)
     }
 
     var body: some View {
@@ -29,7 +29,7 @@ struct CardView: View {
                 .font(.system(size: valueFontSize, weight: .bold, design: .rounded))
                 .foregroundStyle(card.suit.color)
 
-            Text(card.suit.symbol)
+            Image(systemName: card.suit.sfSymbol)
                 .font(.system(size: symbolFontSize))
                 .foregroundStyle(card.suit.color)
         }
