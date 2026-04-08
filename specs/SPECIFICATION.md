@@ -10,7 +10,7 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Start with MVP functionality for rapid delivery
 
 ## Target Platforms
-- iOS 18+ (latest major stable release)
+- iOS 26+ (latest major stable release)
 - iPhone and iPad (universal app with full-screen support)
 - Built with latest Xcode
 - Not distributed via App Store (personal use)
@@ -102,7 +102,7 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 
 ## Technical Requirements
 - Swift/SwiftUI
-- iOS deployment target: iOS 18+
+- iOS deployment target: iOS 26+
 - Xcode: latest version
 - No third-party dependencies
 - Strategy table stored in external data file (JSON or similar)

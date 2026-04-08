@@ -35,7 +35,7 @@ struct CardView: View {
         }
         .frame(width: width, height: height)
         .background(.white)
-        .cornerRadius(height * 0.08)
+        .clipShape(RoundedRectangle(cornerRadius: height * 0.08))
         .shadow(radius: 2)
     }
 }

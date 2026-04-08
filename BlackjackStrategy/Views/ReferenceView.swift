@@ -81,7 +81,7 @@ struct ReferenceView: View {
                             .font(.caption.bold())
                             .frame(width: 30, height: 30)
                             .background(colorForAction(action))
-                            .foregroundColor(.white)
+                            .foregroundStyle(.white)
                     }
                 }
             }

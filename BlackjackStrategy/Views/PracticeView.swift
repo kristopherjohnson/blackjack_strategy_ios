@@ -170,7 +170,7 @@ struct PracticeView: View {
                 .foregroundStyle(.white)
                 .frame(width: 120, height: 50)
                 .background(color)
-                .cornerRadius(10)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .disabled(isDisabled)
         .opacity(isDisabled ? 0.5 : 1.0)
@@ -208,7 +208,7 @@ struct PracticeView: View {
         }
         .padding()
         .background(.regularMaterial)
-        .cornerRadius(12)
+        .clipShape(RoundedRectangle(cornerRadius: 12))
         .onTapGesture {
             withAnimation(stateTransitionAnimation) {
                 gameState.newHand()

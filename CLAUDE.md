@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 iOS app for practicing basic blackjack strategy. Three-tab interface: Practice mode presents hands for user response validation, Reference mode displays interactive strategy charts, Statistics mode tracks rolling accuracy.
 
 **Bundle ID**: net.kristopherjohnson.blackjack_strategy
-**Deployment**: iOS 18+, iPhone and iPad, not App Store distributed
+**Deployment**: iOS 26+, iPhone and iPad, not App Store distributed
 
 ## Build Commands
 
