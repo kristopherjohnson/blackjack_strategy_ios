@@ -1,7 +1,11 @@
 import SwiftUI
 
+/// The reference tab: displays an interactive color-coded basic strategy chart.
 struct ReferenceView: View {
+    /// Strategy data providing table contents.
     private let strategy = StrategyData()
+
+    /// Currently selected hand type section (hard, soft, or pairs).
     @State private var selectedSection = StrategyData.HandType.hard
 
     var body: some View {
@@ -29,6 +33,7 @@ struct ReferenceView: View {
         }
     }
 
+    /// Color legend mapping action labels to their cell colors.
     private var legendView: some View {
         HStack(spacing: 16) {
             legendItem(label: "Hit", color: .blue)
@@ -39,6 +44,7 @@ struct ReferenceView: View {
         .font(.caption)
     }
 
+    /// A single legend entry: colored dot followed by action label.
     private func legendItem(label: String, color: Color) -> some View {
         HStack(spacing: 4) {
             Circle()
@@ -48,6 +54,7 @@ struct ReferenceView: View {
         }
     }
 
+    /// Grid of strategy cells: rows are player hands, columns are dealer up-cards.
     private var strategyTable: some View {
         Grid(horizontalSpacing: 2, verticalSpacing: 2) {
             GridRow {
@@ -81,6 +88,7 @@ struct ReferenceView: View {
         }
     }
 
+    /// Row keys for the currently selected section.
     private var currentRows: [String] {
         switch selectedSection {
         case .hard: strategy.hardTotals
@@ -89,6 +97,7 @@ struct ReferenceView: View {
         }
     }
 
+    /// Maps an action code to its display color.
     private func colorForAction(_ action: String) -> Color {
         switch action {
         case "H": .blue

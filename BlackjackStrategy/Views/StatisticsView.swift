@@ -1,8 +1,11 @@
 import SwiftUI
 
+/// The statistics tab: displays rolling accuracy broken down by overall, category, and individual hand.
 struct StatisticsView: View {
+    /// The statistics store to read and reset.
     var statisticsStore: StatisticsStore
 
+    /// Whether the reset confirmation alert is showing.
     @State private var showingResetAlert = false
 
     var body: some View {
@@ -34,6 +37,7 @@ struct StatisticsView: View {
 
     // MARK: - Sections
 
+    /// Section showing total plays and overall accuracy percentage.
     private var overallSection: some View {
         Section("Overall") {
             accuracyRow(
@@ -43,6 +47,7 @@ struct StatisticsView: View {
         }
     }
 
+    /// Section showing accuracy for each hand category (hard, soft, pairs).
     private var categorySection: some View {
         Section("By Category") {
             accuracyRow(
@@ -60,6 +65,7 @@ struct StatisticsView: View {
         }
     }
 
+    /// Expandable sections showing per-hand accuracy within each category.
     @ViewBuilder
     private var byHandSection: some View {
         let hardKeys = statisticsStore.allHandKeys(for: .hard)
@@ -93,6 +99,7 @@ struct StatisticsView: View {
 
     // MARK: - Row Helpers
 
+    /// A row displaying a label, play count, and accuracy percentage (or "—" if no data).
     private func accuracyRow(label: String, accuracy: (plays: Int, correct: Int)?) -> some View {
         HStack {
             Text(label)
@@ -114,6 +121,7 @@ struct StatisticsView: View {
         }
     }
 
+    /// A row for a specific hand key showing its play count and accuracy.
     private func handRow(category: HandCategory, key: String) -> some View {
         let accuracy = statisticsStore.handAccuracy(category: category, key: key)
         return HStack {
@@ -138,6 +146,7 @@ struct StatisticsView: View {
 
     // MARK: - Formatting
 
+    /// Formats an accuracy tuple as a rounded percentage string (e.g. "85%"), or "—" for zero plays.
     private func formatAccuracy(_ accuracy: (plays: Int, correct: Int)) -> String {
         guard accuracy.plays > 0 else { return "—" }
         let pct = Int((Double(accuracy.correct) / Double(accuracy.plays) * 100).rounded())

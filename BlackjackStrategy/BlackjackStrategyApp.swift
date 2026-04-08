@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// The main app entry point. Configures dark mode and the launch screen background color.
 @main
 struct BlackjackStrategyApp: App {
     init() {

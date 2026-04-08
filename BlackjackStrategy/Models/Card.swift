@@ -1,8 +1,10 @@
 import SwiftUI
 
+/// The four standard playing card suits.
 enum Suit: CaseIterable, Codable {
     case hearts, diamonds, clubs, spades
 
+    /// Unicode character for the suit (e.g. "♠").
     var symbol: String {
         switch self {
         case .hearts: "♥"
@@ -12,6 +14,7 @@ enum Suit: CaseIterable, Codable {
         }
     }
 
+    /// Display color: red for hearts/diamonds, black for clubs/spades.
     var color: Color {
         switch self {
         case .hearts, .diamonds: .red
@@ -19,6 +22,7 @@ enum Suit: CaseIterable, Codable {
         }
     }
 
+    /// SF Symbols name for the filled suit icon.
     var sfSymbol: String {
         switch self {
         case .hearts: "suit.heart.fill"
@@ -29,6 +33,7 @@ enum Suit: CaseIterable, Codable {
     }
 }
 
+/// Standard playing card ranks, with raw values used for ordering.
 enum Rank: Int, CaseIterable, Codable {
     case two = 2
     case three = 3
@@ -44,6 +49,7 @@ enum Rank: Int, CaseIterable, Codable {
     case king = 13
     case ace = 14
 
+    /// Short display string for the rank (e.g. "A", "K", "10", "2").
     var displayValue: String {
         switch self {
         case .two, .three, .four, .five, .six, .seven, .eight, .nine:
@@ -56,6 +62,7 @@ enum Rank: Int, CaseIterable, Codable {
         }
     }
 
+    /// Blackjack point value. Face cards are 10, Ace defaults to 11.
     var blackjackValue: Int {
         switch self {
         case .two, .three, .four, .five, .six, .seven, .eight, .nine:
@@ -67,6 +74,7 @@ enum Rank: Int, CaseIterable, Codable {
         }
     }
 
+    /// Key used for strategy table lookups. Face cards map to "10", Ace to "A".
     var strategyKey: String {
         switch self {
         case .ace: "A"
@@ -76,22 +84,30 @@ enum Rank: Int, CaseIterable, Codable {
     }
 }
 
+/// A single playing card with a rank and suit.
 struct Card: Equatable, Identifiable {
+    /// The card's rank (two through ace).
     let rank: Rank
+
+    /// The card's suit (hearts, diamonds, clubs, or spades).
     let suit: Suit
 
+    /// Unique identifier combining rank display and suit symbol (e.g. "A♠").
     var id: String {
         "\(rank.displayValue)\(suit.symbol)"
     }
 
+    /// Short display string for the rank (e.g. "A", "K", "10").
     var displayValue: String {
         rank.displayValue
     }
 
+    /// Blackjack point value for this card.
     var blackjackValue: Int {
         rank.blackjackValue
     }
 
+    /// Generates a card with a uniformly random rank and suit.
     static func random() -> Card {
         Card(rank: Rank.allCases.randomElement()!, suit: Suit.allCases.randomElement()!)
     }
