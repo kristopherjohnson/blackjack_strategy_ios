@@ -118,6 +118,9 @@
 17. **UI Animations**: Phase 17 complete ✓
 18. **Statistics Tab**: Phase 18 complete ✓
 19. **Production Ready**: All phases complete (manual testing pending for 8, 9, 10, 11, 12, 13, 17)
+20. **Doc Comments**: Phase 21 complete ✓
+21. **Animation Refactor**: Phase 22 complete ✓
+22. **Weighted Practice**: Phase 23 complete ✓
 
 ## Phase 8: Blackjack Re-deal Feature
 - [x] Update hand generation logic to detect blackjack (21) [agent: swift-expert]
@@ -242,16 +245,45 @@
   - [x] Wrap each preview in a container with `.preferredColorScheme(.dark)` applied
   - [x] Verify Xcode previews render in dark mode
 
-## Current Status
-**Phase 18 complete.** Statistics tab fully implemented and manually tested.
+## Phase 21: Doc Comments
+- [x] Add doc comments to all structs, classes, enums, and their members across all 11 Swift source files
 
-All implementation phases complete. Remaining work is manual testing for phases 8, 9, 10, 11, 12, 13, and 17 (device/orientation verification).
+## Phase 22: Refactor Animation Out of Model Layer
+- [x] Remove `withAnimation` and `import SwiftUI` from `GameState.swift`
+- [x] Move animation timing constant and `withAnimation` calls to `PracticeView.swift` call sites
+
+## Phase 23: Weighted Practice Mode
+- [x] Create `WeightedHandGenerator.swift` with `PracticeMode` enum and combo table [agent: swift-expert]
+  - [x] Precompute mapping from all 34 strategy keys to valid two-card rank pairs
+  - [x] Implement inverse-accuracy weighting formula
+  - [x] Implement weighted random hand generation with global/per-hand thresholds
+- [x] Add `practiceMode` property to `GameState` with UserDefaults persistence [agent: swift-expert]
+- [x] Update `GameState.newHand()` to branch on practice mode [agent: swift-expert]
+- [x] Add `@Bindable` to PracticeView, wrap in NavigationStack [agent: swift-expert]
+- [x] Add segmented Picker in toolbar for Uniform/Weighted toggle [agent: swift-expert]
+- [x] Create `WeightedHandGeneratorTests.swift` with 11 tests [agent: swift-expert]
+  - [x] Combo table completeness (all 34 keys covered)
+  - [x] No combos produce blackjack
+  - [x] Combos match their strategy key
+  - [x] Face card pair combo count
+  - [x] Weight computation (neutral, low accuracy, high accuracy, below threshold)
+  - [x] Hand generation (fallback, validity, key matching, dealer independence)
+- [x] Add new files to Xcode project (pbxproj)
+- [x] All tests passing (existing + new)
+- [ ] Manual testing: verify weighted mode biases toward weak hands
+- [ ] Manual testing: verify uniform/weighted toggle persists across restarts
+
+## Current Status
+**Phase 23 complete.** Weighted practice mode implemented and all tests passing.
 
 ### Completed Work
-- **91 unit tests** (82 original + 9 StatisticsStore tests), all passing
+- **102 unit tests** (82 original + 9 StatisticsStore + 11 WeightedHandGenerator), all passing
+- **Weighted Practice (Phase 23)**: `WeightedHandGenerator` with precomputed combo table, inverse-accuracy weighting, `PracticeMode` toggle in toolbar
+- **Doc Comments (Phase 21)**: All structs, classes, enums, and members documented across all Swift files
+- **Animation Refactor (Phase 22)**: `withAnimation` moved from GameState to PracticeView; GameState no longer imports SwiftUI
 - **Statistics Tab (Phase 18)**: `StatisticsStore` with 1000-entry rolling buffer, UserDefaults persistence, `StatisticsView` with overall/category/per-hand breakdown, Reset with confirmation
 - `GameState` lifted to ContentView level; `statisticsStore` property added to GameState
-- `PracticeView` receives `GameState` as parameter (not owner)
+- `PracticeView` uses `@Bindable var gameState` for picker binding, wrapped in NavigationStack
 - Feedback view uses intrinsic sizing (removed ScrollView for compact appearance)
 - Card border removed (.overlay modifier deleted from CardView)
 - Launch screen background color uses playfield green (LaunchBackground color asset)
@@ -272,11 +304,12 @@ All implementation phases complete. Remaining work is manual testing for phases 
 - Phase 12: Test landscape orientation and rotation transitions
 - Phase 13: Verify no text truncation on any device size
 - Phase 17: Verify animation smoothness on iPhone SE and Pro Max; both orientations
+- Phase 23: Verify weighted mode bias and toggle persistence
 
 ### Implementation Summary
-- 11 Swift source files (9 app + 2 new: StatisticsStore, StatisticsView)
-- Complete data models (Card, Hand, GameState, StrategyData, StatisticsStore)
-- Practice mode with random hand generation, feedback, and statistics recording
+- 12 Swift source files (10 app + 2 test files: StatisticsStoreTests, WeightedHandGeneratorTests)
+- Complete data models (Card, Hand, GameState, StrategyData, StatisticsStore, WeightedHandGenerator)
+- Practice mode with uniform/weighted hand generation, feedback, and statistics recording
 - Reference mode with interactive strategy table
 - Statistics mode with rolling accuracy tracking and UserDefaults persistence
 - 340 strategy scenarios in JSON (hard/soft/pairs)
@@ -284,4 +317,4 @@ All implementation phases complete. Remaining work is manual testing for phases 
 - Builds successfully for generic iOS (arm64)
 
 ## Next Steps
-Complete remaining manual testing on physical devices/simulators (phases 8, 9, 10, 11, 12, 13, 17).
+Complete remaining manual testing on physical devices/simulators (phases 8, 9, 10, 11, 12, 13, 17, 23).

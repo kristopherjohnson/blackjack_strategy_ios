@@ -34,7 +34,14 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Show "correct" or "wrong" result
 - When wrong, provide mnemonic or general principle for remembering correct play
 - Tap to continue to next hand after feedback
-- Hands generated randomly (no weighting)
+- **Practice mode toggle** (segmented picker in toolbar): Uniform or Weighted
+  - **Uniform**: Hands generated with equal probability across all non-blackjack two-card hands
+  - **Weighted**: Biases hand generation toward hands the player gets wrong most often
+    - Uses inverse-accuracy formula: lower accuracy → higher frequency
+    - Requires ≥20 total plays before activating (falls back to uniform otherwise)
+    - Per-hand threshold: ≥10 plays before accuracy influences that hand's weight
+    - All hands still appear (minimum weight floor prevents any hand from disappearing)
+    - Mode persisted across app sessions via UserDefaults
 - **Blackjack handling**: If player is dealt 21 (blackjack), automatically re-deal
   - Blackjack is an automatic win, so there's no strategy decision to practice
   - Continue re-dealing until a non-blackjack hand is generated
@@ -101,6 +108,8 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Strategy table stored in external data file (JSON or similar)
   - Enables future rule variations without code changes
   - Includes mnemonics/advice for each scenario
+- Doc comments on all public structs, classes, enums, and their members
+- Animation logic separated from model layer (withAnimation in views only)
 
 ## Constraints
 - MVP scope: minimal features only

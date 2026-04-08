@@ -22,6 +22,8 @@
 		00000000000000000000000D /* StatisticsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000D /* StatisticsStore.swift */; };
 		00000000000000000000000E /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000E /* StatisticsView.swift */; };
 		00000000000000000000000F /* StatisticsStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10000000000000000000000F /* StatisticsStoreTests.swift */; };
+		000000000000000000000010 /* WeightedHandGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000010 /* WeightedHandGenerator.swift */; };
+		000000000000000000000011 /* WeightedHandGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* WeightedHandGeneratorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		10000000000000000000000D /* StatisticsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsStore.swift; sourceTree = "<group>"; };
 		10000000000000000000000E /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		10000000000000000000000F /* StatisticsStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsStoreTests.swift; sourceTree = "<group>"; };
+		100000000000000000000010 /* WeightedHandGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedHandGenerator.swift; sourceTree = "<group>"; };
+		100000000000000000000011 /* WeightedHandGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedHandGeneratorTests.swift; sourceTree = "<group>"; };
 		200000000000000000000001 /* BlackjackStrategy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackjackStrategy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		200000000000000000000002 /* BlackjackStrategyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackjackStrategyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -111,6 +115,7 @@
 				100000000000000000000005 /* GameState.swift */,
 				100000000000000000000006 /* StrategyData.swift */,
 				10000000000000000000000D /* StatisticsStore.swift */,
+				100000000000000000000010 /* WeightedHandGenerator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,6 +144,7 @@
 			children = (
 				10000000000000000000000C /* BlackjackStrategyTests.swift */,
 				10000000000000000000000F /* StatisticsStoreTests.swift */,
+				100000000000000000000011 /* WeightedHandGeneratorTests.swift */,
 			);
 			path = BlackjackStrategyTests;
 			sourceTree = "<group>";
@@ -254,6 +260,7 @@
 				000000000000000000000009 /* ReferenceView.swift in Sources */,
 				00000000000000000000000D /* StatisticsStore.swift in Sources */,
 				00000000000000000000000E /* StatisticsView.swift in Sources */,
+				000000000000000000000010 /* WeightedHandGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +270,7 @@
 			files = (
 				00000000000000000000000C /* BlackjackStrategyTests.swift in Sources */,
 				00000000000000000000000F /* StatisticsStoreTests.swift in Sources */,
+				000000000000000000000011 /* WeightedHandGeneratorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

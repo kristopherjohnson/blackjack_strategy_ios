@@ -42,8 +42,22 @@ class GameState {
     /// Tracks rolling accuracy statistics across practice sessions.
     var statisticsStore: StatisticsStore = StatisticsStore()
 
+    /// Whether hand generation is uniform or weighted toward weak hands.
+    var practiceMode: PracticeMode = .uniform {
+        didSet {
+            UserDefaults.standard.set(practiceMode.rawValue, forKey: "practiceMode")
+        }
+    }
+
+    /// Generator for weighted hand selection.
+    private let weightedGenerator = WeightedHandGenerator()
+
     /// Initializes with a random non-blackjack hand and dealer card.
     init() {
+        if let saved = UserDefaults.standard.string(forKey: "practiceMode"),
+           let mode = PracticeMode(rawValue: saved) {
+            practiceMode = mode
+        }
         playerHand = Hand.randomTwoCard()
         dealerCard = Card.random()
     }
@@ -53,10 +67,18 @@ class GameState {
         playerHand.isPair
     }
 
-    /// Deals a new random hand and resets to the awaiting-action state.
+    /// Deals a new hand and resets to the awaiting-action state.
+    ///
+    /// In weighted mode, biases toward hands the player gets wrong most often.
     func newHand() {
-        playerHand = Hand.randomTwoCard()
-        dealerCard = Card.random()
+        if practiceMode == .weighted {
+            let result = weightedGenerator.generateHand(using: statisticsStore)
+            playerHand = result.hand
+            dealerCard = result.dealerCard
+        } else {
+            playerHand = Hand.randomTwoCard()
+            dealerCard = Card.random()
+        }
         practiceState = .awaitingAction
     }
 

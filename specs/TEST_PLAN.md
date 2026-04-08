@@ -231,6 +231,34 @@
 - [x] Icon colors match app's green felt and dark theme
 - [x] No icon placeholder/missing icon warning in Xcode
 
+## Weighted Hand Generator Tests
+
+### Combo Table Tests
+- [x] Combo table covers all 34 strategy keys (hard, soft, pairs)
+- [x] Combo table has exactly 34 entries
+- [x] No combos produce a blackjack
+- [x] All combos match their assigned strategy key
+- [x] Face card pairs (10,10) have correct combo count (4 same-rank pairs)
+
+### Weight Computation Tests
+- [x] All weights neutral (1.0) with no recorded data
+- [x] Low accuracy (0%) produces high weight (1.1)
+- [x] High accuracy (100%) produces low weight (0.3)
+- [x] Below per-hand threshold (< 10 plays) produces neutral weight (1.0)
+
+### Hand Generation Tests
+- [x] Falls back to uniform with insufficient data (< 20 total plays)
+- [x] Produces valid 2-card non-blackjack hands with sufficient data
+- [x] Generated hand strategy keys exist in the combo table
+- [x] Dealer card is independent (shows variety across generations)
+
+### Manual Tests: Weighted Practice Mode
+- [ ] Weighted mode biases toward hands with low accuracy
+- [ ] Uniform/Weighted toggle appears in Practice tab toolbar
+- [ ] Toggle selection persists across app restarts
+- [ ] Weighted mode with no statistics data behaves like uniform
+- [ ] Weighted mode with sufficient data noticeably favors weak hands
+
 ## Dark Mode Preview Tests
 - [x] All `#Preview` blocks render in dark mode in Xcode canvas
 - [x] No preview uses default (light) color scheme

@@ -3,7 +3,7 @@ import SwiftUI
 /// The practice tab: presents random blackjack hands and validates the player's action against basic strategy.
 struct PracticeView: View {
     /// Shared game state driving the practice loop.
-    var gameState: GameState
+    @Bindable var gameState: GameState
 
     /// Strategy data used to validate player actions.
     private let strategy = StrategyData()
@@ -12,19 +12,33 @@ struct PracticeView: View {
     private let stateTransitionAnimation = Animation.easeInOut(duration: 0.3)
 
     var body: some View {
-        GeometryReader { geometry in
-            let isLandscape = geometry.size.width > geometry.size.height
+        NavigationStack {
+            GeometryReader { geometry in
+                let isLandscape = geometry.size.width > geometry.size.height
 
-            Group {
-                if isLandscape {
-                    landscapeLayout(geometry: geometry)
-                } else {
-                    portraitLayout(geometry: geometry)
+                Group {
+                    if isLandscape {
+                        landscapeLayout(geometry: geometry)
+                    } else {
+                        portraitLayout(geometry: geometry)
+                    }
+                }
+                .padding()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.green.opacity(0.15))
+            }
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Picker("Mode", selection: $gameState.practiceMode) {
+                        ForEach(PracticeMode.allCases, id: \.self) { mode in
+                            Text(mode.rawValue).tag(mode)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .frame(width: 180)
                 }
             }
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.green.opacity(0.15))
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
