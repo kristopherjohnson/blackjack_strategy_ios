@@ -95,13 +95,6 @@ final class CardModelTests: XCTestCase {
         XCTAssertEqual(Suit.spades.symbol, "♠")
     }
 
-    func testSuitSFSymbols() throws {
-        XCTAssertEqual(Suit.hearts.sfSymbol, "suit.heart.fill")
-        XCTAssertEqual(Suit.diamonds.sfSymbol, "suit.diamond.fill")
-        XCTAssertEqual(Suit.clubs.sfSymbol, "suit.club.fill")
-        XCTAssertEqual(Suit.spades.sfSymbol, "suit.spade.fill")
-    }
-
     // MARK: - Random Card Generation Tests
 
     func testRandomCardGeneration() throws {

@@ -22,15 +22,6 @@ enum Suit: CaseIterable, Codable {
         }
     }
 
-    /// SF Symbols name for the filled suit icon.
-    var sfSymbol: String {
-        switch self {
-        case .hearts: "suit.heart.fill"
-        case .diamonds: "suit.diamond.fill"
-        case .clubs: "suit.club.fill"
-        case .spades: "suit.spade.fill"
-        }
-    }
 }
 
 /// Standard playing card ranks, with raw values used for ordering.

@@ -29,7 +29,7 @@ struct CardView: View {
                 .font(.system(size: valueFontSize, weight: .bold, design: .rounded))
                 .foregroundStyle(card.suit.color)
 
-            Image(systemName: card.suit.sfSymbol)
+            Text(card.suit.symbol)
                 .font(.system(size: symbolFontSize))
                 .foregroundStyle(card.suit.color)
         }
