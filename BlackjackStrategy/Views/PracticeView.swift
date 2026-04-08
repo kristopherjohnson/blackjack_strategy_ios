@@ -8,6 +8,9 @@ struct PracticeView: View {
     /// Strategy data used to validate player actions.
     private let strategy = StrategyData()
 
+    /// Consistent animation timing for state transitions.
+    private let stateTransitionAnimation = Animation.easeInOut(duration: 0.3)
+
     var body: some View {
         GeometryReader { geometry in
             let isLandscape = geometry.size.width > geometry.size.height
@@ -144,7 +147,9 @@ struct PracticeView: View {
     private func actionButton(action: PlayerAction, color: Color) -> some View {
         let isDisabled = action == .split && !gameState.canSplit
         return Button {
-            gameState.checkAction(action, strategy: strategy)
+            withAnimation(stateTransitionAnimation) {
+                gameState.checkAction(action, strategy: strategy)
+            }
         } label: {
             Text(action.displayName)
                 .font(.headline)
@@ -191,7 +196,9 @@ struct PracticeView: View {
         .background(.regularMaterial)
         .cornerRadius(12)
         .onTapGesture {
-            gameState.newHand()
+            withAnimation(stateTransitionAnimation) {
+                gameState.newHand()
+            }
         }
     }
 }

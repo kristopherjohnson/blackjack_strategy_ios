@@ -1,8 +1,4 @@
 import Foundation
-import SwiftUI
-
-/// Consistent animation timing for state transitions.
-private let stateTransitionAnimation = Animation.easeInOut(duration: 0.3)
 
 /// A player's possible actions in blackjack.
 enum PlayerAction: String, CaseIterable {
@@ -59,11 +55,9 @@ class GameState {
 
     /// Deals a new random hand and resets to the awaiting-action state.
     func newHand() {
-        withAnimation(stateTransitionAnimation) {
-            playerHand = Hand.randomTwoCard()
-            dealerCard = Card.random()
-            practiceState = .awaitingAction
-        }
+        playerHand = Hand.randomTwoCard()
+        dealerCard = Card.random()
+        practiceState = .awaitingAction
     }
 
     /// Validates the player's action against basic strategy, records the result, and transitions to the feedback state.
@@ -99,12 +93,10 @@ class GameState {
             isCorrect: isCorrect
         ))
 
-        withAnimation(stateTransitionAnimation) {
-            practiceState = .showingResult(
-                correct: isCorrect,
-                correctAction: correctAction,
-                advice: advice
-            )
-        }
+        practiceState = .showingResult(
+            correct: isCorrect,
+            correctAction: correctAction,
+            advice: advice
+        )
     }
 }
