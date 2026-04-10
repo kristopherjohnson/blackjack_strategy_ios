@@ -266,16 +266,16 @@
 - [x] Below per-hand threshold (< 10 plays) produces neutral weight (1.0)
 
 ### Hand Generation Tests
-- [x] Falls back to uniform with insufficient data (< 20 total plays)
+- [x] Falls back to random (uniform) generation with insufficient data (< 20 total plays)
 - [x] Produces valid 2-card non-blackjack hands with sufficient data
 - [x] Generated hand strategy keys exist in the combo table
 - [x] Dealer card is independent (shows variety across generations)
 
 ### Manual Tests: Weighted Practice Mode
 - [ ] Weighted mode biases toward hands with low accuracy
-- [ ] Uniform/Weighted toggle appears in Practice tab toolbar
+- [ ] Random/Weighted toggle appears in Practice tab toolbar
 - [ ] Toggle selection persists across app restarts
-- [ ] Weighted mode with no statistics data behaves like uniform
+- [ ] Weighted mode with no statistics data behaves like random (uniform)
 - [ ] Weighted mode with sufficient data noticeably favors weak hands
 
 ## Dark Mode Preview Tests

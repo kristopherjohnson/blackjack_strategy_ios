@@ -42,7 +42,7 @@ xcodebuild -project BlackjackStrategy.xcodeproj -scheme BlackjackStrategy \
 
 ### Views
 - `ContentView`: TabView container (3 tabs: Practice, Reference, Statistics)
-- `PracticeView`: Game loop UI with CardView components, Uniform/Weighted mode picker in toolbar
+- `PracticeView`: Game loop UI with CardView components, Random/Weighted mode picker in toolbar
 - `ReferenceView`: Interactive Grid-based strategy table with section picker
 - `StatisticsView`: Overall, per-category, and per-hand accuracy display with reset; links to `HandReviewView`
 - `HandReviewView`: Reviews recent practice plays (default: incorrect only), showing hand, player's action vs. correct action, and strategy advice

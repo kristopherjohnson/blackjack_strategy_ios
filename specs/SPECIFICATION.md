@@ -34,11 +34,11 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Show "correct" or "wrong" result
 - When wrong, provide mnemonic or general principle for remembering correct play
 - Tap to continue to next hand after feedback
-- **Practice mode toggle** (segmented picker in toolbar): Uniform or Weighted
-  - **Uniform**: Hands generated with equal probability across all non-blackjack two-card hands
+- **Practice mode toggle** (segmented picker in toolbar): Random or Weighted
+  - **Random**: Hands generated with equal probability across all non-blackjack two-card hands (uniform distribution)
   - **Weighted**: Biases hand generation toward hands the player gets wrong most often
     - Uses inverse-accuracy formula: lower accuracy → higher frequency
-    - Requires ≥20 total plays before activating (falls back to uniform otherwise)
+    - Requires ≥20 total plays before activating (falls back to random otherwise)
     - Per-hand threshold: ≥10 plays before accuracy influences that hand's weight
     - All hands still appear (minimum weight floor prevents any hand from disappearing)
     - Mode persisted across app sessions via UserDefaults

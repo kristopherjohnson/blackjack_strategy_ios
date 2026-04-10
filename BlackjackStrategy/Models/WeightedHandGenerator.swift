@@ -2,7 +2,7 @@ import Foundation
 
 /// Modes for practice hand generation.
 enum PracticeMode: String, CaseIterable {
-    case uniform = "Uniform"
+    case random = "Random"
     case weighted = "Weighted"
 }
 
@@ -72,7 +72,7 @@ struct WeightedHandGenerator {
 
     /// Generates a hand using weighted random sampling based on player accuracy.
     ///
-    /// Falls back to uniform generation if insufficient data exists.
+    /// Falls back to uniform-random generation if insufficient data exists.
     func generateHand(using stats: StatisticsStore) -> (hand: Hand, dealerCard: Card) {
         // Check global threshold
         guard let overall = stats.overallAccuracy,

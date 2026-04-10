@@ -42,8 +42,8 @@ class GameState {
     /// Tracks rolling accuracy statistics across practice sessions.
     var statisticsStore: StatisticsStore = StatisticsStore()
 
-    /// Whether hand generation is uniform or weighted toward weak hands.
-    var practiceMode: PracticeMode = .uniform {
+    /// Whether hand generation is uniformly random or weighted toward weak hands.
+    var practiceMode: PracticeMode = .random {
         didSet {
             UserDefaults.standard.set(practiceMode.rawValue, forKey: "practiceMode")
         }

@@ -260,7 +260,7 @@
 - [x] Add `practiceMode` property to `GameState` with UserDefaults persistence [agent: swift-expert]
 - [x] Update `GameState.newHand()` to branch on practice mode [agent: swift-expert]
 - [x] Add `@Bindable` to PracticeView, wrap in NavigationStack [agent: swift-expert]
-- [x] Add segmented Picker in toolbar for Uniform/Weighted toggle [agent: swift-expert]
+- [x] Add segmented Picker in toolbar for Random/Weighted toggle [agent: swift-expert]
 - [x] Create `WeightedHandGeneratorTests.swift` with 11 tests [agent: swift-expert]
   - [x] Combo table completeness (all 34 keys covered)
   - [x] No combos produce blackjack
@@ -271,7 +271,7 @@
 - [x] Add new files to Xcode project (pbxproj)
 - [x] All tests passing (existing + new)
 - [ ] Manual testing: verify weighted mode biases toward weak hands
-- [ ] Manual testing: verify uniform/weighted toggle persists across restarts
+- [ ] Manual testing: verify random/weighted toggle persists across restarts
 
 ## Phase 24: Hand Review
 - [x] Extend `PlayResult` with optional `dealerKey`, `playerAction`, `correctAction`, `advice` fields and `Identifiable` (UUID `id` excluded from `CodingKeys`) [agent: swift-expert]
@@ -331,7 +331,7 @@
 ### Implementation Summary
 - 14 Swift source files (12 app + 2 test files: StatisticsStoreTests, WeightedHandGeneratorTests)
 - Complete data models (Card, Hand, GameState, StrategyData, StatisticsStore, WeightedHandGenerator)
-- Practice mode with uniform/weighted hand generation, feedback, and statistics recording
+- Practice mode with random/weighted hand generation, feedback, and statistics recording
 - Reference mode with interactive strategy table
 - Statistics mode with rolling accuracy tracking and UserDefaults persistence
 - 340 strategy scenarios in JSON (hard/soft/pairs)
