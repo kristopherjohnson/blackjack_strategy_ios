@@ -112,7 +112,11 @@ class GameState {
         statisticsStore.record(PlayResult(
             handCategory: category,
             handKey: playerHand.strategyKey,
-            isCorrect: isCorrect
+            isCorrect: isCorrect,
+            dealerKey: dealerCard.rank.strategyKey,
+            playerAction: action.rawValue,
+            correctAction: correctAction.rawValue,
+            advice: advice
         ))
 
         practiceState = .showingResult(

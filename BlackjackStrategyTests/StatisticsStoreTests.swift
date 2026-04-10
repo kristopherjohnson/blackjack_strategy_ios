@@ -96,6 +96,77 @@ final class StatisticsStoreTests: XCTestCase {
         XCTAssertNil(store.overallAccuracy)
     }
 
+    // MARK: - Review Data
+
+    func testPlayResultDecodesLegacyFormat() throws {
+        // Legacy JSON lacks the review fields added for the Hand Review feature.
+        let legacyJSON = """
+        {
+            "handCategory": "Hard",
+            "handKey": "16",
+            "isCorrect": false
+        }
+        """.data(using: .utf8)!
+
+        let result = try JSONDecoder().decode(PlayResult.self, from: legacyJSON)
+        XCTAssertEqual(result.handCategory, .hard)
+        XCTAssertEqual(result.handKey, "16")
+        XCTAssertFalse(result.isCorrect)
+        XCTAssertNil(result.dealerKey)
+        XCTAssertNil(result.playerAction)
+        XCTAssertNil(result.correctAction)
+        XCTAssertNil(result.advice)
+    }
+
+    func testPlayResultRoundTripsReviewFields() throws {
+        let original = PlayResult(
+            handCategory: .hard,
+            handKey: "16",
+            isCorrect: false,
+            dealerKey: "10",
+            playerAction: "S",
+            correctAction: "H",
+            advice: "Hit hard 16 against dealer 10."
+        )
+        let data = try JSONEncoder().encode(original)
+        let decoded = try JSONDecoder().decode(PlayResult.self, from: data)
+
+        XCTAssertEqual(decoded.handCategory, original.handCategory)
+        XCTAssertEqual(decoded.handKey, original.handKey)
+        XCTAssertEqual(decoded.isCorrect, original.isCorrect)
+        XCTAssertEqual(decoded.dealerKey, original.dealerKey)
+        XCTAssertEqual(decoded.playerAction, original.playerAction)
+        XCTAssertEqual(decoded.correctAction, original.correctAction)
+        XCTAssertEqual(decoded.advice, original.advice)
+    }
+
+    func testReviewableResultsExcludesLegacyEntries() {
+        let store = makeStore()
+        // Legacy-shaped entry (no dealerKey) — must NOT appear in review.
+        store.record(PlayResult(handCategory: .hard, handKey: "16", isCorrect: false))
+        // New-format entries with full review data.
+        store.record(PlayResult(
+            handCategory: .hard, handKey: "12", isCorrect: true,
+            dealerKey: "6", playerAction: "S", correctAction: "S",
+            advice: "Stand hard 12 vs dealer 6."
+        ))
+        store.record(PlayResult(
+            handCategory: .soft, handKey: "A,7", isCorrect: false,
+            dealerKey: "9", playerAction: "S", correctAction: "H",
+            advice: "Hit soft 18 vs dealer 9."
+        ))
+
+        let all = store.reviewableResults(incorrectOnly: false)
+        XCTAssertEqual(all.count, 2)
+        // Newest first: A,7 was recorded last.
+        XCTAssertEqual(all.first?.handKey, "A,7")
+        XCTAssertEqual(all.last?.handKey, "12")
+
+        let incorrect = store.reviewableResults(incorrectOnly: true)
+        XCTAssertEqual(incorrect.count, 1)
+        XCTAssertEqual(incorrect.first?.handKey, "A,7")
+    }
+
     func testPersistence() throws {
         let suiteName = "TestStatistics"
         let defaults = UserDefaults(suiteName: suiteName)!

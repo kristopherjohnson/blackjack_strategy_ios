@@ -62,6 +62,15 @@ An iOS iPhone app for memorizing and practicing basic blackjack strategy. The ap
 - Display shows count of plays and percentage correct for each group
 - Groups with zero plays show "—" instead of a percentage
 
+### Hand Review (sub-screen of Statistics Mode)
+- **Purpose**: lets the user review recent practice hands, especially mistakes, to understand what they played vs. what the correct action was
+- **Entry point**: NavigationLink at the top of the Statistics tab labeled "Review Recent Hands"
+- **Filter control**: segmented picker with two options — "Incorrect" (default) and "All"
+- **Row contents**: hand description (e.g. "Hard 16 vs dealer 10"), the player's chosen action, the correct action, and the strategy advice text for incorrect plays
+- **Ordering**: newest plays first
+- **Empty state**: uses `ContentUnavailableView` when no reviewable entries match the current filter
+- **Data source**: pulls from the same rolling buffer as the statistics display; entries recorded before the review feature shipped lack review data and are excluded from the list but still count for accuracy statistics
+
 ## User Interface
 - Three-tab interface (TabView)
 - **Dark mode only**: App always displays in dark mode regardless of system settings

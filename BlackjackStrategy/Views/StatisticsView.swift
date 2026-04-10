@@ -11,6 +11,7 @@ struct StatisticsView: View {
     var body: some View {
         NavigationStack {
             List {
+                reviewSection
                 overallSection
                 categorySection
                 byHandSection
@@ -36,6 +37,17 @@ struct StatisticsView: View {
     }
 
     // MARK: - Sections
+
+    /// Section containing the link to the Hand Review screen.
+    private var reviewSection: some View {
+        Section {
+            NavigationLink {
+                HandReviewView(statisticsStore: statisticsStore)
+            } label: {
+                Label("Review Recent Hands", systemImage: "magnifyingglass")
+            }
+        }
+    }
 
     /// Section showing total plays and overall accuracy percentage.
     private var overallSection: some View {

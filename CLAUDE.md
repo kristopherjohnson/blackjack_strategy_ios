@@ -32,7 +32,7 @@ xcodebuild -project BlackjackStrategy.xcodeproj -scheme BlackjackStrategy \
 - **Hand.strategyKey**: Converts hand to lookup key based on isPair/isSoft/hardTotal
 - **GameState**: `@Observable` class managing practice state machine (awaitingAction → showingResult). No SwiftUI imports — animation is handled in views.
 - **StrategyData**: Loads JSON, provides `getCorrectAction()` and `getAdvice()` lookups
-- **StatisticsStore**: Rolling buffer of last 1000 plays, persisted via UserDefaults, provides per-hand/category accuracy
+- **StatisticsStore**: Rolling buffer of last 1000 plays, persisted via UserDefaults, provides per-hand/category accuracy. `PlayResult` also carries optional review data (`dealerKey`, `playerAction`, `correctAction`, `advice`) for the Hand Review screen; legacy entries have those fields as `nil` and are excluded from review lists but still count toward accuracy stats.
 - **WeightedHandGenerator**: Precomputes combo table mapping 34 strategy keys to valid card pairs. Generates hands biased toward low-accuracy keys using inverse-accuracy weighting.
 
 ### Strategy Rules (4-8 deck, dealer stands soft 17)
@@ -44,11 +44,12 @@ xcodebuild -project BlackjackStrategy.xcodeproj -scheme BlackjackStrategy \
 - `ContentView`: TabView container (3 tabs: Practice, Reference, Statistics)
 - `PracticeView`: Game loop UI with CardView components, Uniform/Weighted mode picker in toolbar
 - `ReferenceView`: Interactive Grid-based strategy table with section picker
-- `StatisticsView`: Overall, per-category, and per-hand accuracy display with reset
+- `StatisticsView`: Overall, per-category, and per-hand accuracy display with reset; links to `HandReviewView`
+- `HandReviewView`: Reviews recent practice plays (default: incorrect only), showing hand, player's action vs. correct action, and strategy advice
 
 ## Testing
 
-102 unit tests covering Card, Hand, StrategyData loading, strategy logic, StatisticsStore, and WeightedHandGenerator. Tests verify all 340 strategy entries exist with valid actions and non-empty advice.
+Unit tests cover Card, Hand, StrategyData loading, strategy logic, StatisticsStore (including legacy decode compatibility and review filtering), and WeightedHandGenerator. Tests verify all 340 strategy entries exist with valid actions and non-empty advice.
 
 ## Documentation
 
