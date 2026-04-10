@@ -36,10 +36,10 @@ struct ReferenceView: View {
     /// Color legend mapping action labels to their cell colors.
     private var legendView: some View {
         HStack(spacing: 16) {
-            legendItem(label: "Hit", color: .blue)
-            legendItem(label: "Stand", color: .red)
-            legendItem(label: "Double", color: .green)
-            legendItem(label: "Split", color: .purple)
+            legendItem(label: "Hit", color: ActionColor.hit)
+            legendItem(label: "Stand", color: ActionColor.stand)
+            legendItem(label: "Double", color: ActionColor.double)
+            legendItem(label: "Split", color: ActionColor.split)
         }
         .font(.caption)
     }
@@ -99,13 +99,7 @@ struct ReferenceView: View {
 
     /// Maps an action code to its display color.
     private func colorForAction(_ action: String) -> Color {
-        switch action {
-        case "H": .blue
-        case "S": .red
-        case "D": .green
-        case "P": .purple
-        default: .gray
-        }
+        ActionColor.color(forRawAction: action)
     }
 }
 

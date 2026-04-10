@@ -208,6 +208,9 @@
 - [x] `reset()` clears all entries; all accuracy values return nil/zero
 - [x] Persistence: `StatisticsStore` initialized from UserDefaults reflects previously recorded plays
 - [x] Persistence: uses a separate UserDefaults suite for testing (avoids polluting app data)
+- [x] `PlayResult` decodes legacy JSON (no review fields) with review fields as `nil`
+- [x] `PlayResult` round-trips all review fields through encode/decode
+- [x] `reviewableResults(incorrectOnly:)` excludes legacy entries (no `dealerKey`), orders newest-first, and honors the incorrect-only filter
 
 ### Manual Tests: Statistics Tab
 - [x] Statistics tab appears as third tab with correct icon and label
@@ -223,6 +226,22 @@
 - [ ] Statistics display readable on iPhone SE (small screen)
 - [ ] Statistics display readable on iPhone 17 Pro Max (large screen)
 - [ ] Statistics display readable on iPad
+
+### Manual Tests: Hand Review Sub-screen
+- [x] "Review Recent Hands" NavigationLink appears at top of Statistics tab
+- [x] Tapping the link navigates to the Hand Review screen
+- [x] Segmented filter defaults to "Incorrect"
+- [x] Switching to "All" shows every reviewable play, newest-first
+- [x] Switching back to "Incorrect" shows only wrong plays
+- [x] Each row shows hand description ("Hard 16 vs dealer 10"), player action, correct action, and advice (on wrong plays)
+- [x] Empty state uses `ContentUnavailableView` with appropriate message for the current filter
+- [x] Legacy statistics entries still count toward overall accuracy but do not appear in review list
+
+## Action Color Scheme Tests
+- [x] Practice buttons use Hit=green, Stand=red, Double=orange, Split=blue
+- [x] Reference chart cells and legend use the same color scheme
+- [x] "Correct play:" action name in Practice feedback is colored per the scheme
+- [x] "You played" and "Correct" action names in Hand Review rows are colored per the scheme
 
 ## App Icon Tests
 - [x] Icon appears in simulator home screen at correct size (verified manually)

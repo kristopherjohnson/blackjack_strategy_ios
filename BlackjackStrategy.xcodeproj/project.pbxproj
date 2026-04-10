@@ -25,6 +25,7 @@
 		000000000000000000000010 /* WeightedHandGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000010 /* WeightedHandGenerator.swift */; };
 		000000000000000000000011 /* WeightedHandGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000011 /* WeightedHandGeneratorTests.swift */; };
 		000000000000000000000013 /* HandReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000013 /* HandReviewView.swift */; };
+		000000000000000000000014 /* ActionColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000000000000000000014 /* ActionColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		100000000000000000000011 /* WeightedHandGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightedHandGeneratorTests.swift; sourceTree = "<group>"; };
 		100000000000000000000012 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		100000000000000000000013 /* HandReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HandReviewView.swift; sourceTree = "<group>"; };
+		100000000000000000000014 /* ActionColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionColor.swift; sourceTree = "<group>"; };
 		200000000000000000000001 /* BlackjackStrategy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackjackStrategy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		200000000000000000000002 /* BlackjackStrategyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlackjackStrategyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -115,10 +117,10 @@
 			isa = PBXGroup;
 			children = (
 				100000000000000000000003 /* Card.swift */,
-				100000000000000000000004 /* Hand.swift */,
 				100000000000000000000005 /* GameState.swift */,
-				100000000000000000000006 /* StrategyData.swift */,
+				100000000000000000000004 /* Hand.swift */,
 				10000000000000000000000D /* StatisticsStore.swift */,
+				100000000000000000000006 /* StrategyData.swift */,
 				100000000000000000000010 /* WeightedHandGenerator.swift */,
 			);
 			path = Models;
@@ -127,11 +129,12 @@
 		400000000000000000000005 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				100000000000000000000014 /* ActionColor.swift */,
 				100000000000000000000007 /* CardView.swift */,
+				100000000000000000000013 /* HandReviewView.swift */,
 				100000000000000000000008 /* PracticeView.swift */,
 				100000000000000000000009 /* ReferenceView.swift */,
 				10000000000000000000000E /* StatisticsView.swift */,
-				100000000000000000000013 /* HandReviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				00000000000000000000000D /* StatisticsStore.swift in Sources */,
 				00000000000000000000000E /* StatisticsView.swift in Sources */,
 				000000000000000000000013 /* HandReviewView.swift in Sources */,
+				000000000000000000000014 /* ActionColor.swift in Sources */,
 				000000000000000000000010 /* WeightedHandGenerator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

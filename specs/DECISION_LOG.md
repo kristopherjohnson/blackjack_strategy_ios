@@ -75,4 +75,6 @@
 2026-04-08 15:30 | SPECIFICATION.md | Added doc comments and animation refactor as technical requirements
 2026-04-08 15:30 | IMPLEMENTATION_PLAN.md | Added phases 21 (doc comments), 22 (animation refactor), 23 (weighted practice) — all complete
 2026-04-08 15:30 | IMPLEMENTATION_PLAN.md | Updated unit test count to 102, source file count to 12
+2026-04-10 00:00 | SPECIFICATION.md, IMPLEMENTATION_PLAN.md, TEST_PLAN.md | Add Hand Review sub-screen under Statistics tab: reviews recent plays (default Incorrect), shows hand vs. dealer, player/correct actions, and advice; `PlayResult` extended with optional review fields for backward-compatible decoding
+2026-04-10 00:01 | SPECIFICATION.md, IMPLEMENTATION_PLAN.md, TEST_PLAN.md | Unified action color scheme across all views via `ActionColor`: Hit (green), Stand (red), Double (orange), Split (blue); applied to Practice buttons, Reference chart, Practice feedback, and Hand Review rows
 <!-- LOG_END -->

@@ -147,12 +147,12 @@ struct PracticeView: View {
     private var actionButtons: some View {
         VStack(spacing: 12) {
             HStack(spacing: 12) {
-                actionButton(action: .hit, color: .blue)
-                actionButton(action: .stand, color: .orange)
+                actionButton(action: .hit, color: ActionColor.hit)
+                actionButton(action: .stand, color: ActionColor.stand)
             }
             HStack(spacing: 12) {
-                actionButton(action: .double, color: .purple)
-                actionButton(action: .split, color: .green)
+                actionButton(action: .double, color: ActionColor.double)
+                actionButton(action: .split, color: ActionColor.split)
             }
         }
     }
@@ -191,8 +191,12 @@ struct PracticeView: View {
 
             if !correct {
                 VStack(spacing: 8) {
-                    Text("Correct play: \(correctAction.displayName)")
-                        .font(.headline)
+                    HStack(spacing: 4) {
+                        Text("Correct play:")
+                        Text(correctAction.displayName)
+                            .foregroundStyle(ActionColor.color(for: correctAction))
+                    }
+                    .font(.headline)
                     Text(advice)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)

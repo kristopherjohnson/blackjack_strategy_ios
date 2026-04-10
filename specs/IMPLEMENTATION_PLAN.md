@@ -273,11 +273,33 @@
 - [ ] Manual testing: verify weighted mode biases toward weak hands
 - [ ] Manual testing: verify uniform/weighted toggle persists across restarts
 
+## Phase 24: Hand Review
+- [x] Extend `PlayResult` with optional `dealerKey`, `playerAction`, `correctAction`, `advice` fields and `Identifiable` (UUID `id` excluded from `CodingKeys`) [agent: swift-expert]
+- [x] Add custom `init(from:)` using `decodeIfPresent` for backward compatibility with legacy persisted entries [agent: swift-expert]
+- [x] Add `StatisticsStore.reviewableResults(incorrectOnly:)` returning newest-first, filtered to entries with review data [agent: swift-expert]
+- [x] Update `GameState.checkAction()` to record dealer key, player action, correct action, and advice with each play [agent: swift-expert]
+- [x] Create `HandReviewView` with segmented Incorrect/All filter (default Incorrect), `ContentUnavailableView` empty state, and `ReviewRowView` showing hand description, player/correct actions, and advice [agent: swift-expert]
+- [x] Add NavigationLink section at top of `StatisticsView` List linking to `HandReviewView`
+- [x] Add `HandReviewView.swift` to Xcode project (pbxproj)
+- [x] Add tests: legacy decode compatibility, full-field round-trip, `reviewableResults()` filtering
+- [x] Manual testing: verify existing statistics data still loads and new plays populate the review list
+
+## Phase 25: Unified Action Color Scheme
+- [x] Create `ActionColor.swift` with canonical colors: Hit (green), Stand (red), Double (orange), Split (blue), plus `color(for:)` and `color(forRawAction:)` helpers [agent: swift-expert]
+- [x] Update `PracticeView` action buttons to use `ActionColor`
+- [x] Update `ReferenceView` legend and chart cells to use `ActionColor`
+- [x] Color the "Correct play:" action name in Practice feedback via `ActionColor`
+- [x] Use `ActionColor` for "You played" and "Correct" action names in `HandReviewView` rows
+- [x] Add `ActionColor.swift` to Xcode project (pbxproj)
+- [x] Manual testing: verify all screens use the unified scheme
+
 ## Current Status
-**Phase 23 complete.** Weighted practice mode implemented and all tests passing.
+**Phases 24 and 25 complete.** Hand Review sub-screen ships, and action colors are unified across Practice, Reference, Practice feedback, and Hand Review.
 
 ### Completed Work
-- **102 unit tests** (82 original + 9 StatisticsStore + 11 WeightedHandGenerator), all passing
+- **107 unit tests** (82 original + 12 StatisticsStore + 11 WeightedHandGenerator + 2 action-related), all passing
+- **Action Color Scheme (Phase 25)**: `ActionColor` enum centralizes Hit/Stand/Double/Split colors (green/red/orange/blue) for Practice buttons, Reference chart, Practice feedback, and Hand Review rows
+- **Hand Review (Phase 24)**: `HandReviewView` sub-screen under Statistics; `PlayResult` extended with optional review fields (backward-compatible decoding); newest-first list with Incorrect/All filter
 - **Weighted Practice (Phase 23)**: `WeightedHandGenerator` with precomputed combo table, inverse-accuracy weighting, `PracticeMode` toggle in toolbar
 - **Doc Comments (Phase 21)**: All structs, classes, enums, and members documented across all Swift files
 - **Animation Refactor (Phase 22)**: `withAnimation` moved from GameState to PracticeView; GameState no longer imports SwiftUI
@@ -307,7 +329,7 @@
 - Phase 23: Verify weighted mode bias and toggle persistence
 
 ### Implementation Summary
-- 12 Swift source files (10 app + 2 test files: StatisticsStoreTests, WeightedHandGeneratorTests)
+- 14 Swift source files (12 app + 2 test files: StatisticsStoreTests, WeightedHandGeneratorTests)
 - Complete data models (Card, Hand, GameState, StrategyData, StatisticsStore, WeightedHandGenerator)
 - Practice mode with uniform/weighted hand generation, feedback, and statistics recording
 - Reference mode with interactive strategy table

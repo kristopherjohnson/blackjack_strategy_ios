@@ -4,14 +4,17 @@ An iOS app for memorizing and practicing basic blackjack strategy.
 
 ## Features
 
-- **Practice Mode**: Random hands with immediate feedback on correct/incorrect plays
+- **Practice Mode**: Random hands with immediate feedback on correct/incorrect plays; Uniform or Weighted hand generation (weighted biases toward hands you get wrong)
 - **Reference Mode**: Interactive strategy charts for hard totals, soft totals, and pairs
+- **Statistics Mode**: Rolling accuracy over the last 1000 plays, broken down overall, by category, and by specific hand
+- **Hand Review**: Review recent practice plays (default: incorrect only) to see what you played vs. the correct action and strategy advice
 - **340 scenarios**: Complete basic strategy coverage with learning advice for each situation
+- **Consistent action colors**: Hit (green), Stand (red), Double (orange), Split (blue) across Practice and Reference screens
 
 ## Requirements
 
-- iOS 18+
-- Xcode 16+
+- iOS 26+
+- Xcode 26+
 
 ## Building
 

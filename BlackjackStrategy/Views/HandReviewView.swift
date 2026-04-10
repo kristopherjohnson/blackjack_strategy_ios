@@ -78,12 +78,12 @@ struct ReviewRowView: View {
                 labeledValue(
                     label: "You played",
                     value: actionName(result.playerAction),
-                    color: result.isCorrect ? .primary : .red
+                    color: actionColor(result.playerAction)
                 )
                 labeledValue(
                     label: "Correct",
                     value: actionName(result.correctAction),
-                    color: .primary
+                    color: actionColor(result.correctAction)
                 )
             }
             .font(.subheadline)
@@ -119,6 +119,12 @@ struct ReviewRowView: View {
     private func actionName(_ raw: String?) -> String {
         guard let raw, let action = PlayerAction(rawValue: raw) else { return "—" }
         return action.displayName
+    }
+
+    /// Returns the canonical action color, or secondary gray for missing data.
+    private func actionColor(_ raw: String?) -> Color {
+        guard let raw else { return .secondary }
+        return ActionColor.color(forRawAction: raw)
     }
 
     /// Renders a small label above a value, used to show "You played" and "Correct" columns.

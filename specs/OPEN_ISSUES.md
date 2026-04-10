@@ -10,7 +10,6 @@
 
 ### Future Enhancements (Post-MVP)
 - Score counter or streak tracker?
-- Previous hand review feature?
 - Wrong-scenario tracking and practice focus?
 
 ## Decisions Pending
